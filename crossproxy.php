@@ -23,6 +23,8 @@ class CrossProxy {
       'curl_connecttimeout' => '5',
       'curl_connecttimeout_ms' => '5000',
       'debug' => 1,
+      'verbose' => 5,
+      'logfile' => 'proxy.log',
       'user_agent_string' => 'ByteConsult proxy user-agent'
    );
 
@@ -52,6 +54,9 @@ class CrossProxy {
    protected $_backend_response_headers   = NULL;
 
    protected $_debug        = NULL;
+   protected $_verbose      = 0;
+
+   private   $fp_logfile    = NULL;
 
    public function  __construct( $forward_host, $allowed_hostnames = NULL, $handle_errors = FALSE, $conf_settings=array()) {
 
@@ -75,15 +80,28 @@ class CrossProxy {
          $this->_debug=1;
       }
 
+      if (!empty($this->settings['verbose'])) {
+         $this->_verbose=1;
+      }
+
+      if (!empty($this->settings['logfile'])) {
+         if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s : %s", __METHOD__ , 'Opening log file', $this->settings['logfile'])); } 
+         $this->fp_logfile = fopen($this->settings['logfile'], 'w+');
+      }
+
       if (!empty($this->_debug)) {
+         /*
          echo "Settings:" . "<BR/>\n";
          echo "=========" . "<BR/>\n";
          foreach($this->settings as $nr => $setting) {
             echo sprintf("%s => %s<BR/>\n", $nr, $setting);
          }
          echo "<BR/>\n";
+          */
+
       }
 
+      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing target host info')); } 
       /* Parse the forward host option */
       if (is_array($forward_host)) {
          list($this->_target_host, $this->_target_path )= array_values($forward_host);
@@ -101,6 +119,7 @@ class CrossProxy {
       }
 
       /* Store the SERVER method since we will tailor it */
+      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing _SERVER var info')); } 
       if(is_array($_SERVER)) {
          $this->_server = $_SERVER;
       } else {
@@ -109,14 +128,7 @@ class CrossProxy {
          die();
       }
 
-      if (!empty($this->_debug)) {
-         echo "Server:" . "<BR/>\n";
-         echo "=======" . "<BR/>\n";
-         foreach($this->_server as $nr => $server) {
-            echo sprintf("%s => %s<BR/>\n", $nr, $server);
-         }
-         echo "<BR/>\n";
-      }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , '$_SERVER information'), $this->_server); }
 
       /* Store the REQUEST info since we will tailor it */
       if(is_array($_REQUEST)) {
@@ -126,14 +138,7 @@ class CrossProxy {
          $this->_post_get = array();
       }
 
-      if (!empty($this->_debug)) {
-         echo "Request:" . "<BR/>\n";
-         echo "========" . "<BR/>\n";
-         foreach($this->_post_get as $nr => $req) {
-            echo sprintf("%s => %s<BR/>\n", $nr, $req);
-         }
-         echo "<BR/>\n";
-      }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , '$_REQUEST information'), $this->_post_get); }
 
       /* We can't live without 'real' user agents strings */
       if(!$this->get_srv_key('HTTP_USER_AGENT')) {
@@ -148,18 +153,7 @@ class CrossProxy {
          $this->_request_cookies = $this->get_srv_key('HTTP_COOKIE');
       }
 
-      if (!empty($this->_debug)) {
-         echo "Cookies:" . "<BR/>\n";
-         echo "========" . "<BR/>\n";
-         echo $this->_request_cookies;
-
-         /*
-         foreach($this->_request_cookies as $nr => $cookie) {
-            echo sprintf("%s => %s<BR/>\n", $nr, $cookie);
-         }
-          */
-         echo "<BR/>\n";
-      }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'COOKIE information'), $this->_request_cookies); }
 
       /* Starting from version 5.4.0 , php-fastcgi will support the getallheaders function 
        * $phpVersion = phpversion();
@@ -182,11 +176,11 @@ class CrossProxy {
          /* for apache support */
          $this->_request_headers = getallheaders();
       }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'Request header information'), $this->_request_headers); }
 
       if ($this->get_req_key('Accept-Encoding')) {
          unset($_request_headers['Accept-Encoding']);
       }
-
 
       if($this->_request_headers === FALSE) {
          header("HTTP/1.1 412 Precondition Failed"); 
@@ -209,7 +203,10 @@ class CrossProxy {
       }
       $this->_request_method=$method;
 
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'Incomming request method', $this->_request_method)); }
+
       if($this->_request_method === self::POST || $this->_request_method === self::PUT) {
+         if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - Reading %s php input", __METHOD__ , $this->_request_method)); }
          $this->_request_body = @file_get_contents('php://input');
       }
 
@@ -252,10 +249,15 @@ class CrossProxy {
     *  sent.
     */
    protected function execute() {
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating user permissions...')); }
       $this->_validate_user_permissions();
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Prepare the backend request..')); }
       $this->_create_request();
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Perform request.')); }
       $this->_do_request();
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Proxy Reply to client')); }
       $this->_send_reply();
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Done')); }
    }
 
    /**
@@ -270,6 +272,7 @@ class CrossProxy {
          return;
       }
 
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating request source.')); }
       $host=array();
       /* Validate the request source */
       if ($this->get_srv_key('REMOTE_HOST')) {
@@ -280,6 +283,7 @@ class CrossProxy {
 
          if (!empty($host)) {
             if(!in_array($host, $this->_allowed_hostnames))
+               if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Access denied')); }
                header("HTTP/1.1 403 Forbidden");
             throw new Exception("Requests from hostname ($host) are not allowed");
             die();
@@ -306,6 +310,8 @@ class CrossProxy {
          }
       }
 
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - result: %s", __METHOD__ , $url)); }
+
       $this->_target_url = $url;
    }
 
@@ -320,6 +326,8 @@ class CrossProxy {
       $fh=null;
 
       /* POST */
+      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - set curl %s options", __METHOD__ , $this->_request_method)); }
+
       if($this->_request_method === self::POST) {
          curl_setopt($ch, CURLOPT_POST, true);
          curl_setopt($ch, CURLOPT_ENCODING, "");
@@ -388,19 +396,8 @@ class CrossProxy {
       $this->_backend_output = curl_exec($ch);
       $this->_backend_curl_info = curl_getinfo($ch);
 
-      if (!empty($this->_debug)) {
-         echo "curl_info:" . "<BR/>\n";
-         echo "==========" . "<BR/>\n";
-         foreach($this->_backend_curl_info as $nr => $output) {
-            echo sprintf("%s => %s<BR/>\n", $nr, $output);
-         }
-         /*
-         echo "Output" . "<BR/>\n";
-         echo "==========" . "<BR/>\n";
-         echo $this->_backend_output;
-          */
-         echo "<BR/>\n";
-      }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - curl_info output", __METHOD__), $this->_backend_curl_info); }
+
    }
 
    protected function _send_reply() {
@@ -430,24 +427,9 @@ class CrossProxy {
       * */
       $this->_backend_response_headers = $this->custom_http_parse_headers($headers);
 
-      if (!empty($this->_debug)) {
-         echo "Backend header:" . "<BR/>\n";
-         echo "===============" . "<BR/>\n";
-         echo $headers ."<BR/>\n";
-         echo "===============" . "<BR/>\n";
-         foreach($this->_backend_response_headers as $nr => $output) {
-            if (!is_array($output)) {
-               echo sprintf("%s => %s<BR/>\n", $nr, $output);
-            } else {
-               echo sprintf("%s => %s<BR/>\n", $nr, print_r($output,true));
-            }
-         }
-         echo "<BR/>\n";
-         echo "Backend body:" . "<BR/>\n";
-         echo "=============" . "<BR/>\n";
-         echo $this->_backend_response_body;
-         echo "<BR/>\n";
-      }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend headers", __METHOD__), $this->_backend_response_headers); }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend body", __METHOD__)); }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - \tlength: %s", strlen($this->_backend_response_body))); }
 
       // header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
       foreach($this->_backend_response_headers as $key => $header) {
@@ -598,6 +580,7 @@ class CrossProxy {
       );
    }
 
+
    private function custom_http_parse_headers( $header ) {
       $retVal = array();
       $fields = explode("\r\n", preg_replace('/\x0D\x0A[\x09\x20]+/', ' ', $header));
@@ -612,6 +595,65 @@ class CrossProxy {
          }
       }
       return $retVal;
+   }
+
+   private function trace($level, $msg) {
+      if (empty($this->_debug) || empty($this->_verbose) || empty($level) || empty($msg)) { return; }
+
+      $out_array = array ();
+      $numargs = func_num_args();
+      if ($numargs == 3) {
+         $out_array = func_get_arg(2);
+         if (!is_array($out_array)) {
+            $out_array = array();
+         }
+      }
+
+      $DateTime=@date('Y-m-d H:i:s', time());
+
+      if ( $level <= $this->_verbose ) {
+         $mylvl=NULL;
+         switch($level) {
+            case 0:
+               $mylvl ="error";
+               break;
+            case 1:
+               $mylvl ="core ";
+               break;
+            case 2:
+               $mylvl ="info ";
+               break;
+            case 3:
+               $mylvl ="notic";
+               break;
+            case 4:
+               $mylvl ="verbs";
+               break;
+            case 5:
+               $mylvl ="dtail";
+               break;
+            default :
+               $mylvl ="exec ";
+               break;
+         }
+         $content = $DateTime. " [" .  posix_getpid() ."]:[" . $level . "]" . $mylvl . " - " . $msg . "\n";
+         if (count($out_array)) {
+            foreach($out_array as $key => $val) {
+               $content = $DateTime. " [" .  posix_getpid() ."]:[" . $level . "]" . $mylvl . " - " . $key ." => " . $val . "\n";
+            }
+         }
+         if (is_resource($this->fp_logfile)) {
+            fwrite($this->fp_logfile, $content);
+         } else {
+            echo $content;
+         }
+      }
+   }
+
+   public function __destruct() {
+      if (is_resource($this->fp_logfile)) {
+         fclose($this->fp_logfile);
+      }
    }
 }
 ?>
