@@ -110,7 +110,7 @@ class CrossProxy {
       }
 
       /* We can't live without 'real' user agents strings */
-      if(empty($this->get_srv_key('HTTP_USER_AGENT'))) {
+      if(!$this->get_srv_key('HTTP_USER_AGENT')) {
          header("HTTP/1.1 403 Forbidden");
          throw new Exception("No HTTP User Agent was found, we deny this client");
       }
@@ -147,7 +147,7 @@ class CrossProxy {
          throw new Exception("Could not get request headers");
       }
 
-      if (empty($this->get_srv_key('REQUEST_METHOD'))) {
+      if (!$this->get_srv_key('REQUEST_METHOD')) {
          header("HTTP/1.1 405 Method Not Allowed");
          throw new Exception("Request method unknown or empty");
       }
@@ -164,7 +164,7 @@ class CrossProxy {
          $this->_request_body = @file_get_contents('php://input');
       }
 
-      if (!empty($this->get_req_key('Content-Type'))) {
+      if (!$this->get_req_key('Content-Type')) {
          $this->_request_content_type = $this->get_req_key('Content-Type');
       }
 
@@ -215,9 +215,9 @@ class CrossProxy {
       
       $host=array();
       /* Validate the request source */
-      if (!empty($this->get_srv_key('REMOTE_HOST'))) {
+      if ($this->get_srv_key('REMOTE_HOST')) {
          $host = $this->get_srv_key('REMOTE_HOST');
-      } elseif (!empty($this->get_srv_key('REMOTE_ADDR'))) {
+      } elseif ($this->get_srv_key('REMOTE_ADDR')) {
          $host = $this->get_srv_key('REMOTE_ADDR');
       } else {
       
@@ -243,7 +243,7 @@ class CrossProxy {
 
       /* GET support, it's easy when just piping along the encoded source qry string */
       if($this->_request_method === self::GET) {
-         if (!empty($this->get_srv_key('QUERY_STRING'))) {
+         if ($this->get_srv_key('QUERY_STRING')) {
             $url = sprintf("%s?%s",$url, $this->get_srv_key('QUERY_STRING'));
          }
       }
@@ -301,7 +301,7 @@ class CrossProxy {
       /* TRUE to return the transfer as a string of the return value of curl_exec() instead of outputting it out directly. */
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-      if (!empty($this->get_req_key('Cookie'))) {
+      if ($this->get_req_key('Cookie')) {
          curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
       }
 
