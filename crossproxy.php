@@ -10,8 +10,8 @@
 // ini_set("zlib.output_compression", 4096);
 
 // For compression support
-ob_start();
-ob_implicit_flush(0);
+//ob_start();
+//ob_implicit_flush(0);
 
 class CrossProxy {
 
@@ -78,6 +78,15 @@ class CrossProxy {
          $this->_debug=1;
       }
 
+      if (!empty($this->_debug)) {
+         echo "Settings:" . "<BR/>\n";
+         echo "=========" . "<BR/>\n";
+         foreach($this->settings as $nr => $setting) {
+            echo sprintf("%s => %s<BR/>\n", $nr, $setting);
+         }
+         echo "<BR/>\n";
+      }
+
       /* Parse the forward host option */
       if (is_array($forward_host)) {
          list($this->_target_host, $this->_target_path )= array_values($forward_host);
@@ -102,11 +111,30 @@ class CrossProxy {
          throw new Exception("Empty server vars look very suspicious");
       }
 
+      if (!empty($this->_debug)) {
+         echo "Server:" . "<BR/>\n";
+         echo "=======" . "<BR/>\n";
+         foreach($this->_server as $nr => $server) {
+            echo sprintf("%s => %s<BR/>\n", $nr, $server);
+         }
+         echo "<BR/>\n";
+      }
+
       /* Store the REQUEST info since we will tailor it */
       if(is_array($_REQUEST)) {
+         //print_r($_REQUEST); exit;
          $this->_request = $_REQUEST;
       } else {
          $this->_request = array();
+      }
+
+      if (!empty($this->_debug)) {
+         echo "Request:" . "<BR/>\n";
+         echo "========" . "<BR/>\n";
+         foreach($this->_request as $nr => $req) {
+            echo sprintf("%s => %s<BR/>\n", $nr, $req);
+         }
+         echo "<BR/>\n";
       }
 
       /* We can't live without 'real' user agents strings */
@@ -116,8 +144,22 @@ class CrossProxy {
       }
 
       /* get cookies */
-      if(is_array($_COOKIE)) {
-         $this->_request_cookies = $_COOKIE;
+      if ($this->get_srv_key('HTTP_COOKIE')) {
+         // $this->_request_cookies = $_COOKIE; // Better is SRV HTTP_COOKIE
+         $this->_request_cookies = $this->get_srv_key('HTTP_COOKIE');
+      }
+
+      if (!empty($this->_debug)) {
+         echo "Cookies:" . "<BR/>\n";
+         echo "========" . "<BR/>\n";
+         echo $this->_request_cookies;
+
+         /*
+         foreach($this->_request_cookies as $nr => $cookie) {
+            echo sprintf("%s => %s<BR/>\n", $nr, $cookie);
+         }
+          */
+         echo "<BR/>\n";
       }
 
       /* Starting from version 5.4.0 , php-fastcgi will support the getallheaders function 
@@ -296,6 +338,9 @@ class CrossProxy {
 
       /* TRUE to include the header in the output. */
       curl_setopt($ch, CURLOPT_HEADER, true);
+
+      curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
       curl_setopt($ch, CURLOPT_USERAGENT, $this->get_srv_key('HTTP_USER_AGENT'));
 
       /* TRUE to return the transfer as a string of the return value of curl_exec() instead of outputting it out directly. */
@@ -304,6 +349,9 @@ class CrossProxy {
       if ($this->get_req_key('Cookie')) {
          curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
       }
+
+      /* We accept compressed input from the backend */ 
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
 
       /* An array of HTTP header fields to set, in the format array('Content-type: text/plain', 'Content-length: 100') */
       // FIXME // curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_generateProxyRequestHeaders());
@@ -323,11 +371,22 @@ class CrossProxy {
 
       $this->_backend_output = curl_exec($ch);
       $this->_backend_curl_info = curl_getinfo($ch);
+
+      if (!empty($this->_debug)) {
+         echo "curl_info:" . "<BR/>\n";
+         echo "==========" . "<BR/>\n";
+         foreach($this->_backend_curl_info as $nr => $output) {
+            echo sprintf("%s => %s<BR/>\n", $nr, $output);
+         }
+         echo "Output" . "<BR/>\n";
+         echo "==========" . "<BR/>\n";
+         echo $this->_backend_output;
+      }
    }
 
    protected function _send_reply() {
       if (!$this->_backend_curl_info['http_code']==200) {
-   /*
+         /*
          if (preg_match("/utf-8/", strtolower($this->_backend_curl_info['content_type']), $matches)) {
             if (!empty($matches[0])) {
                $contents = utf8_encode($this->_backend_output);
@@ -335,9 +394,13 @@ class CrossProxy {
          } else {
             $contents = $this->_backend_output;
          }
-   */
+          */
+
+         echo $this->_backend_output;
+         //ob_end_flush();
       }
-      header(sprintf"HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code']));
+
+      header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
       // foreach($this->_response_headers as $name => $value) 
    }
 
@@ -453,7 +516,7 @@ class CrossProxy {
    }
 */
    private function get_code_definition($code) {
-      // see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+      // see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html RFC2616
       // [Informational 1xx]
       $def=array(
             '100'=>'Continue',
