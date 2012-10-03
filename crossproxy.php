@@ -351,7 +351,7 @@ class CrossProxy {
       }
 
       /* We accept compressed input from the backend */ 
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
+      // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
 
       /* An array of HTTP header fields to set, in the format array('Content-type: text/plain', 'Content-length: 100') */
       // FIXME // curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_generateProxyRequestHeaders());
@@ -432,17 +432,19 @@ class CrossProxy {
          echo $this->_backend_response_body;
          echo "<BR/>\n";
       }
-
+/*
       header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
       foreach($this->_backend_response_headers as $key => $header) {
          if (!is_array($header)) {
-            header("$key: $header");
+            header("$key: $header",true);
          } else {
-            header(sprintf("%s: %s",$key, implode(', ',$header)));
+            header(sprintf("%s: %s",$key, implode(', ',$header)),true);
          }
       }
+ */
+      header("Glenn: washere",true);
       if (isset($this->_backend_response_body)) {
-         //echo $this->_backend_response_body;
+         echo $this->_backend_response_body;
       }
          //echo "CONTENT";
    }
