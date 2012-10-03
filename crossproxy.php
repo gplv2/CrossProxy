@@ -13,6 +13,8 @@
 //ob_start();
 //ob_implicit_flush(0);
 
+$proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
+
 class CrossProxy {
 
    const POST    = 'POST';
@@ -24,7 +26,7 @@ class CrossProxy {
    protected $settings= array(
          'curl_connecttimeout' => '5',
          'curl_connecttimeout_ms' => '5000',
-         'debug' => 1,
+         'debug' => 0,
          'user_agent_string' => 'ByteConsult proxy user-agent'
    );
 
@@ -50,10 +52,8 @@ class CrossProxy {
    protected $_backend_output = NULL;
 
    /* Will hold the response body/header sent back by the server that the proxy request was made to */
-   /* needed ? 
    protected $_backend_response_body      = NULL;
    protected $_backend_response_headers   = NULL;
-   */
 
    protected $_debug        = NULL;
 
@@ -338,7 +338,7 @@ class CrossProxy {
 
       /* TRUE to include the header in the output. */
       curl_setopt($ch, CURLOPT_HEADER, true);
-
+      /* TRUE to include the sent header in the curl_info output, great debug aid */
       curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 
       curl_setopt($ch, CURLOPT_USERAGENT, $this->get_srv_key('HTTP_USER_AGENT'));
@@ -378,9 +378,12 @@ class CrossProxy {
          foreach($this->_backend_curl_info as $nr => $output) {
             echo sprintf("%s => %s<BR/>\n", $nr, $output);
          }
+         /*
          echo "Output" . "<BR/>\n";
          echo "==========" . "<BR/>\n";
          echo $this->_backend_output;
+          */
+         echo "<BR/>\n";
       }
    }
 
@@ -396,12 +399,52 @@ class CrossProxy {
          }
           */
 
-         echo $this->_backend_output;
+         // echo $this->_backend_output;
          //ob_end_flush();
+      }
+      list( $headers, $this->_backend_response_body) =  explode("\r\n\r\n", $this->_backend_output, 2);
+      // Can also be done like this (but keeps the \r\n\r\n somewhere in the resultset):
+      // $header=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+      // $body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
+      
+      /* Use pecl first when it is available */
+      if(function_exists('http_parse_headers')) {
+         $this->_backend_response_headers = http_parse_headers($headers);
+      } else {
+         $this->_backend_response_headers = $this->custom_http_parse_headers($headers);
+      }
+
+      if (!empty($this->_debug)) {
+         echo "Backend header:" . "<BR/>\n";
+         echo "===============" . "<BR/>\n";
+         echo $headers ."<BR/>\n";
+         echo "===============" . "<BR/>\n";
+         foreach($this->_backend_response_headers as $nr => $output) {
+            if (!is_array($output)) {
+               echo sprintf("%s => %s<BR/>\n", $nr, $output);
+            } else {
+               echo sprintf("%s => %s<BR/>\n", $nr, print_r($output,true));
+            }
+         }
+         echo "<BR/>\n";
+         echo "Backend body:" . "<BR/>\n";
+         echo "=============" . "<BR/>\n";
+         echo $this->_backend_response_body;
+         echo "<BR/>\n";
       }
 
       header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
-      // foreach($this->_response_headers as $name => $value) 
+      foreach($this->_backend_response_headers as $key => $header) {
+         if (!is_array($header)) {
+            header("$key: $header");
+         } else {
+            header(sprintf("%s: %s",$key, implode(', ',$header)));
+         }
+      }
+      if (isset($this->_backend_response_body)) {
+         //echo $this->_backend_response_body;
+      }
+         echo "CONTENT";
    }
 
       /* Source headers where
@@ -566,19 +609,21 @@ class CrossProxy {
             '505'=>'HTTP Version Not Supported'
          );
    }
+
+    private function custom_http_parse_headers( $header ) {
+        $retVal = array();
+        $fields = explode("\r\n", preg_replace('/\x0D\x0A[\x09\x20]+/', ' ', $header));
+        foreach( $fields as $field ) {
+            if( preg_match('/([^:]+): (.+)/m', $field, $match) ) {
+                $match[1] = preg_replace('/(?<=^|[\x09\x20\x2D])./e', 'strtoupper("\0")', strtolower(trim($match[1])));
+                if( isset($retVal[$match[1]]) ) {
+                    $retVal[$match[1]] = array($retVal[$match[1]], $match[2]);
+                } else {
+                    $retVal[$match[1]] = trim($match[2]);
+                }
+            }
+        }
+        return $retVal;
+    }
 }
-
-
-
-// $proxy = new CrossProxy('http://live.synctrace.com/', array('94.226.36.213'));
-// http://www2.synctrace.com/ajax-proxy/proxy.php?class.planning.php?account=depolder&cmd=haltes&service=50
-$proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
-
-/**
- * Here's the actual script part. Comment it out or remove it if you simply want
- *  the class' functionality
-$proxy = new CrossProxy('http://login.example.com/');
-$proxy->execute();
- */
-
 ?>
