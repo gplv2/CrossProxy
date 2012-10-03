@@ -81,27 +81,19 @@ class CrossProxy {
       }
 
       if (!empty($this->settings['verbose'])) {
-         $this->_verbose=1;
+         $this->_verbose=$this->settings['verbose'];
       }
 
       if (!empty($this->settings['logfile'])) {
          if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s : %s", __METHOD__ , 'Opening log file', $this->settings['logfile'])); } 
+
          $this->fp_logfile = fopen($this->settings['logfile'], 'w+');
-      }
-
-      if (!empty($this->_debug)) {
-         /*
-         echo "Settings:" . "<BR/>\n";
-         echo "=========" . "<BR/>\n";
-         foreach($this->settings as $nr => $setting) {
-            echo sprintf("%s => %s<BR/>\n", $nr, $setting);
+         if (!is_resource($this->fp_logfile)) {
+            trigger_error('log file write problem'); exit;
          }
-         echo "<BR/>\n";
-          */
-
       }
 
-      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing target host info')); } 
+      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Start, Parsing target host info')); } 
       /* Parse the forward host option */
       if (is_array($forward_host)) {
          list($this->_target_host, $this->_target_path )= array_values($forward_host);
@@ -119,7 +111,7 @@ class CrossProxy {
       }
 
       /* Store the SERVER method since we will tailor it */
-      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing _SERVER var info')); } 
+      // if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing _SERVER var info')); } 
       if(is_array($_SERVER)) {
          $this->_server = $_SERVER;
       } else {
@@ -128,7 +120,8 @@ class CrossProxy {
          die();
       }
 
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , '$_SERVER information'), $this->_server); }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_SERVER information')); }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_server,true))); }
 
       /* Store the REQUEST info since we will tailor it */
       if(is_array($_REQUEST)) {
@@ -138,7 +131,8 @@ class CrossProxy {
          $this->_post_get = array();
       }
 
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , '$_REQUEST information'), $this->_post_get); }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_REQUEST information')); }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_post_get,true))); }
 
       /* We can't live without 'real' user agents strings */
       if(!$this->get_srv_key('HTTP_USER_AGENT')) {
@@ -153,7 +147,7 @@ class CrossProxy {
          $this->_request_cookies = $this->get_srv_key('HTTP_COOKIE');
       }
 
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'COOKIE information'), $this->_request_cookies); }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'COOKIE information', $this->_request_cookies)); }
 
       /* Starting from version 5.4.0 , php-fastcgi will support the getallheaders function 
        * $phpVersion = phpversion();
@@ -176,7 +170,8 @@ class CrossProxy {
          /* for apache support */
          $this->_request_headers = getallheaders();
       }
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'Request header information'), $this->_request_headers); }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'Request header information')); }
+      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_request_headers,true))); }
 
       if ($this->get_req_key('Accept-Encoding')) {
          unset($_request_headers['Accept-Encoding']);
@@ -214,7 +209,7 @@ class CrossProxy {
          $this->_request_content_type = $this->get_req_key('Content-Type');
       }
 
-      //$this->execute();
+      $this->execute();
 
    }
 
@@ -429,7 +424,7 @@ class CrossProxy {
 
       if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend headers", __METHOD__), $this->_backend_response_headers); }
       if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend body", __METHOD__)); }
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - \tlength: %s", strlen($this->_backend_response_body))); }
+      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - \tlength: %s", __METHOD__, strlen($this->_backend_response_body))); }
 
       // header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
       foreach($this->_backend_response_headers as $key => $header) {
