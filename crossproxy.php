@@ -444,7 +444,7 @@ class CrossProxy {
       if (isset($this->_backend_response_body)) {
          //echo $this->_backend_response_body;
       }
-         echo "CONTENT";
+         //echo "CONTENT";
    }
 
       /* Source headers where
