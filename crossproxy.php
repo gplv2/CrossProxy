@@ -6,12 +6,8 @@
  * with this package in the file LICENSE.txt.
  */
 
-// ob_start("ob_gzhandler");
-// ini_set("zlib.output_compression", 4096);
-
-// For compression support
-//ob_start();
-//ob_implicit_flush(0);
+ini_set("zlib.output_compression", 'On');
+ini_set("zlib.output_compression_level", -1);
 
 $proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
 
@@ -24,14 +20,14 @@ class CrossProxy {
 
    /* Some presets */ 
    protected $settings= array(
-         'curl_connecttimeout' => '5',
-         'curl_connecttimeout_ms' => '5000',
-         'debug' => 0,
-         'user_agent_string' => 'ByteConsult proxy user-agent'
+      'curl_connecttimeout' => '5',
+      'curl_connecttimeout_ms' => '5000',
+      'debug' => 1,
+      'user_agent_string' => 'ByteConsult proxy user-agent'
    );
 
    /* Store unprocessed $_REQUEST , kind of a misleading name imho , but makes sense in terms of POST/GET etc */
-   protected $_request = NULL;
+   protected $_post_get = NULL;
    /* Store unprocessed $_SERVER */
    protected $_server = NULL;
    /* Store semi processed request headers works: (nginx / apache) */
@@ -67,6 +63,7 @@ class CrossProxy {
       if(!function_exists('curl_init')) {
          header("HTTP/1.1 400 Bad Request"); 
          throw new Exception("Installing php5-curl first works better");
+         die();
       }
 
       // Merge the class defaults with the settings
@@ -109,6 +106,7 @@ class CrossProxy {
       } else {
          header("HTTP/1.1 403 Forbidden");
          throw new Exception("Empty server vars look very suspicious");
+         die();
       }
 
       if (!empty($this->_debug)) {
@@ -123,15 +121,15 @@ class CrossProxy {
       /* Store the REQUEST info since we will tailor it */
       if(is_array($_REQUEST)) {
          //print_r($_REQUEST); exit;
-         $this->_request = $_REQUEST;
+         $this->_post_get = $_REQUEST;
       } else {
-         $this->_request = array();
+         $this->_post_get = array();
       }
 
       if (!empty($this->_debug)) {
          echo "Request:" . "<BR/>\n";
          echo "========" . "<BR/>\n";
-         foreach($this->_request as $nr => $req) {
+         foreach($this->_post_get as $nr => $req) {
             echo sprintf("%s => %s<BR/>\n", $nr, $req);
          }
          echo "<BR/>\n";
@@ -141,6 +139,7 @@ class CrossProxy {
       if(!$this->get_srv_key('HTTP_USER_AGENT')) {
          header("HTTP/1.1 403 Forbidden");
          throw new Exception("No HTTP User Agent was found, we deny this client");
+         die();
       }
 
       /* get cookies */
@@ -184,21 +183,29 @@ class CrossProxy {
          $this->_request_headers = getallheaders();
       }
 
+      if ($this->get_req_key('Accept-Encoding')) {
+         unset($_request_headers['Accept-Encoding']);
+      }
+
+
       if($this->_request_headers === FALSE) {
          header("HTTP/1.1 412 Precondition Failed"); 
          throw new Exception("Could not get request headers");
+         die();
       }
 
       if (!$this->get_srv_key('REQUEST_METHOD')) {
          header("HTTP/1.1 405 Method Not Allowed");
          throw new Exception("Request method unknown or empty");
+         die();
       }
 
       $method = strtoupper($this->get_srv_key('REQUEST_METHOD'));
-      
+
       if(!in_array($method, array(self::GET, self::PUT, self::DELETE, self::POST))) {
          header(sprintf("HTTP/1.1 405 Method Not Allowed (%s)",$method));
          throw new Exception("Request method ($method) invalid");
+         die();
       }
       $this->_request_method=$method;
 
@@ -210,13 +217,21 @@ class CrossProxy {
          $this->_request_content_type = $this->get_req_key('Content-Type');
       }
 
-      $this->execute();
+      //$this->execute();
 
    }
 
    private function get_req_key($name) {
-      if(key_exists($name, $this->_request)) {
-         return($this->_request[$name]);
+      if(key_exists($name, $this->_post_get)) {
+         return($this->_post_get[$name]);
+      } else {
+         return null;
+      }
+   }
+
+   private function get_hdr_key($name) {
+      if(key_exists($name, $this->_request_headers)) {
+         return($this->_request_headers[$name]);
       } else {
          return null;
       }
@@ -229,7 +244,7 @@ class CrossProxy {
          return null;
       }
    }
-      
+
 
    /**
     * Execute the proxy request. This method sets HTTP headers and write to the
@@ -254,7 +269,7 @@ class CrossProxy {
       if($this->_allowed_hostnames === NULL) {
          return;
       }
-      
+
       $host=array();
       /* Validate the request source */
       if ($this->get_srv_key('REMOTE_HOST')) {
@@ -262,11 +277,12 @@ class CrossProxy {
       } elseif ($this->get_srv_key('REMOTE_ADDR')) {
          $host = $this->get_srv_key('REMOTE_ADDR');
       } else {
-      
-      if (!empty($host)) {
-         if(!in_array($host, $this->_allowed_hostnames))
-            header("HTTP/1.1 403 Forbidden");
+
+         if (!empty($host)) {
+            if(!in_array($host, $this->_allowed_hostnames))
+               header("HTTP/1.1 403 Forbidden");
             throw new Exception("Requests from hostname ($host) are not allowed");
+            die();
          }
       }
    }
@@ -310,11 +326,11 @@ class CrossProxy {
          curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_request_body);
       } elseif($this->_request_method === self::PUT) {
 
-      /* PUT */
-      /** 
-       * Great article on making PUT and delete work:
-       * http://stackoverflow.com/questions/2153650/how-to-start-a-get-post-put-delete-request-and-judge-request-type-in-php
-       */
+         /* PUT */
+         /** 
+          * Great article on making PUT and delete work:
+          * http://stackoverflow.com/questions/2153650/how-to-start-a-get-post-put-delete-request-and-judge-request-type-in-php
+          */
 
          $fh = fopen('php://memory', 'rw');
 
@@ -351,7 +367,7 @@ class CrossProxy {
       }
 
       /* We accept compressed input from the backend */ 
-      // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
+      //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
 
       /* An array of HTTP header fields to set, in the format array('Content-type: text/plain', 'Content-length: 100') */
       // FIXME // curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_generateProxyRequestHeaders());
@@ -359,7 +375,7 @@ class CrossProxy {
 /*
      // Accept: 
       curl_setopt($this->ch, CURLOPT_HTTPHEADER, array('HTTP_ACCEPT_LANGUAGE: UTF-8', 'ACCEPT: application/json'));
-*/
+ */
 
       if (isset($this->settings['curl_connecttimeout'])) {
          curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->settings['curl_connecttimeout']);
@@ -406,13 +422,13 @@ class CrossProxy {
       // Can also be done like this (but keeps the \r\n\r\n somewhere in the resultset):
       // $header=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
       // $body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
-      
-      /* Use pecl first when it is available */
+
+      /* I don't like the pecl one ...
       if(function_exists('http_parse_headers')) {
          $this->_backend_response_headers = http_parse_headers($headers);
-      } else {
-         $this->_backend_response_headers = $this->custom_http_parse_headers($headers);
       }
+      * */
+      $this->_backend_response_headers = $this->custom_http_parse_headers($headers);
 
       if (!empty($this->_debug)) {
          echo "Backend header:" . "<BR/>\n";
@@ -432,57 +448,28 @@ class CrossProxy {
          echo $this->_backend_response_body;
          echo "<BR/>\n";
       }
-/*
-      header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
+
+      // header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
       foreach($this->_backend_response_headers as $key => $header) {
          if (!is_array($header)) {
             header("$key: $header",true);
          } else {
-            header(sprintf("%s: %s",$key, implode(', ',$header)),true);
+            if (!in_array($key, array('Content-Encoding', 'Vary','Content-Length','Connection','Content-Type'))) {
+               header(sprintf("%s: %s",$key, implode(', ',$header)),true);
+            }
          }
       }
- */
+      /*
+       */
       header("Glenn: washere",true);
+      // var_dump(headers_list());
+      // exit;
       if (isset($this->_backend_response_body)) {
-         echo $this->_backend_response_body;
+         //echo $this->_backend_response_body;
+         //die();
       }
-         //echo "CONTENT";
    }
 
-      /* Source headers where
-       * HTTP/1.1 200 OK
-       * Server: nginx
-       * Date: Tue, 02 Oct 2012 12:16:37 GMT
-       * Content-Type: text/html
-       * Transfer-Encoding: chunked
-       * Connection: keep-alive
-       * X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-       * Last-Modified: Tue, 02 Oct 2012 12:16:37 GMT
-       * Pragma: no-cache
-       * Expires: Tue, 02 Oct 2012 12:16:37 GMT
-       * Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-       * Content-Encoding: gzip
-       * Vary: Accept-Encoding
-       */
-         /* This gives me :
-          * status => HTTP/1.1 200 OK
-          * Server => nginx
-          * Date => Tue, 02 Oct 2012 12:13:26 GMT
-          * Content-Type => text/html
-          * Transfer-Encoding => chunked
-          * Connection => keep-alive
-          * X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-          * Last-Modified => Tue, 02 Oct 2012 12:13:26 GMT
-          * Pragma => no-cache
-          * Expires => Tue, 02 Oct 2012 12:13:26 GMT
-          * Cache-Control => post-check=0, pre-check=0
-          */
-
-   /**
-    * Make it so that this class handles it's own errors. This means that
-    *  it will register PHP error and exception handlers, and die() if there
-    *  is a problem. 
-    */
    protected function _setErrorHandlers() {
       set_error_handler(array($this, 'handleError'));
       set_exception_handler(array($this, 'handleException'));
@@ -512,10 +499,10 @@ class CrossProxy {
       $this->_sendFatalError("Fatal Exception: '" . $exception->getMessage());
       /*
        * I don't want to hand out line information to an end user
-         . "' in "
-         . $exception->getFile()
-         . ":"
-         . $exception->getLine());
+       . "' in "
+       . $exception->getFile()
+       . ":"
+       . $exception->getLine());
        */
       }
 
@@ -523,10 +510,9 @@ class CrossProxy {
     * Display a fatal error to the user. This will halt execution.
     * @param string $message
     */
-   protected static function _sendFatalError($message)
-      {
+   protected static function _sendFatalError($message) {
       die($message);
-      }
+   }
 
 /*
    // Include this function on your pages
@@ -559,73 +545,73 @@ class CrossProxy {
          exit();
       }
    }
-*/
+ */
    private function get_code_definition($code) {
       // see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html RFC2616
       // [Informational 1xx]
       $def=array(
-            '100'=>'Continue',
-            '101'=>'Switching Protocols',
-            // [Successful 2xx]
-            '200'=>'OK',
-            '201'=>'Created',
-            '202'=>'Accepted',
-            '203'=>'Non-Authoritative Information',
-            '204'=>'No Content',
-            '205'=>'Reset Content',
-            '206'=>'Partial Content',
-            // [Redirection 3xx]
-            '300'=>'Multiple Choices',
-            '301'=>'Moved Permanently',
-            '302'=>'Found',
-            '303'=>'See Other',
-            '304'=>'Not Modified',
-            '305'=>'Use Proxy',
-            '306'=>'Unused',
-            '307'=>'Temporary Redirect',
-            // [Client Error 4xx]
-            '400'=>'Bad Request',
-            '401'=>'Unauthorized',
-            '402'=>'Payment Required',
-            '403'=>'Forbidden',
-            '404'=>'Not Found',
-            '405'=>'Method Not Allowed',
-            '406'=>'Not Acceptable',
-            '407'=>'Proxy Authentication Required',
-            '408'=>'Request Timeout',
-            '409'=>'Conflict',
-            '410'=>'Gone',
-            '411'=>'Length Required',
-            '412'=>'Precondition Failed',
-            '413'=>'Request Entity Too Large',
-            '414'=>'Request-URI Too Long',
-            '415'=>'Unsupported Media Type',
-            '416'=>'Requested Range Not Satisfiable',
-            '417'=>'Expectation Failed',
-            // [Server Error 5xx]
-            '500'=>'Internal Server Error',
-            '501'=>'Not Implemented',
-            '502'=>'Bad Gateway',
-            '503'=>'Service Unavailable',
-            '504'=>'Gateway Timeout',
-            '505'=>'HTTP Version Not Supported'
-         );
+         '100'=>'Continue',
+         '101'=>'Switching Protocols',
+         // [Successful 2xx]
+         '200'=>'OK',
+         '201'=>'Created',
+         '202'=>'Accepted',
+         '203'=>'Non-Authoritative Information',
+         '204'=>'No Content',
+         '205'=>'Reset Content',
+         '206'=>'Partial Content',
+         // [Redirection 3xx]
+         '300'=>'Multiple Choices',
+         '301'=>'Moved Permanently',
+         '302'=>'Found',
+         '303'=>'See Other',
+         '304'=>'Not Modified',
+         '305'=>'Use Proxy',
+         '306'=>'Unused',
+         '307'=>'Temporary Redirect',
+         // [Client Error 4xx]
+         '400'=>'Bad Request',
+         '401'=>'Unauthorized',
+         '402'=>'Payment Required',
+         '403'=>'Forbidden',
+         '404'=>'Not Found',
+         '405'=>'Method Not Allowed',
+         '406'=>'Not Acceptable',
+         '407'=>'Proxy Authentication Required',
+         '408'=>'Request Timeout',
+         '409'=>'Conflict',
+         '410'=>'Gone',
+         '411'=>'Length Required',
+         '412'=>'Precondition Failed',
+         '413'=>'Request Entity Too Large',
+         '414'=>'Request-URI Too Long',
+         '415'=>'Unsupported Media Type',
+         '416'=>'Requested Range Not Satisfiable',
+         '417'=>'Expectation Failed',
+         // [Server Error 5xx]
+         '500'=>'Internal Server Error',
+         '501'=>'Not Implemented',
+         '502'=>'Bad Gateway',
+         '503'=>'Service Unavailable',
+         '504'=>'Gateway Timeout',
+         '505'=>'HTTP Version Not Supported'
+      );
    }
 
-    private function custom_http_parse_headers( $header ) {
-        $retVal = array();
-        $fields = explode("\r\n", preg_replace('/\x0D\x0A[\x09\x20]+/', ' ', $header));
-        foreach( $fields as $field ) {
-            if( preg_match('/([^:]+): (.+)/m', $field, $match) ) {
-                $match[1] = preg_replace('/(?<=^|[\x09\x20\x2D])./e', 'strtoupper("\0")', strtolower(trim($match[1])));
-                if( isset($retVal[$match[1]]) ) {
-                    $retVal[$match[1]] = array($retVal[$match[1]], $match[2]);
-                } else {
-                    $retVal[$match[1]] = trim($match[2]);
-                }
+   private function custom_http_parse_headers( $header ) {
+      $retVal = array();
+      $fields = explode("\r\n", preg_replace('/\x0D\x0A[\x09\x20]+/', ' ', $header));
+      foreach( $fields as $field ) {
+         if( preg_match('/([^:]+): (.+)/m', $field, $match) ) {
+            $match[1] = preg_replace('/(?<=^|[\x09\x20\x2D])./e', 'strtoupper("\0")', strtolower(trim($match[1])));
+            if( isset($retVal[$match[1]]) ) {
+               $retVal[$match[1]] = array($retVal[$match[1]], $match[2]);
+            } else {
+               $retVal[$match[1]] = trim($match[2]);
             }
-        }
-        return $retVal;
-    }
+         }
+      }
+      return $retVal;
+   }
 }
 ?>
