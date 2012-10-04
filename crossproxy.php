@@ -393,7 +393,7 @@ class CrossProxy {
 
       /* We accept compressed input from the backend */ 
       // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
-      $this->backend_request_headers['Accept-Encoding']='gzip';
+      $this->backend_request_headers['Accept-Encoding']='gzip'; // FIXME
 
       /* An array of HTTP header fields to set, in the format array('Content-type: text/plain', 'Content-length: 100') */
       
