@@ -1,0 +1,129 @@
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::__construct - $_SERVER information
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_HOST => www2.synctrace.com
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_ACCEPT => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en-us,en;q=0.5
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_DNT => 1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_CONNECTION => keep-alive
+2012-10-04 11:21:57 [7214]:[4]verbs - 		HTTP_COOKIE => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+2012-10-04 11:21:57 [7214]:[4]verbs - 		PATH => /usr/local/bin:/usr/bin:/bin
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_SIGNATURE => <address>Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch Server at www2.synctrace.com Port 80</address>
+
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_SOFTWARE => Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_NAME => www2.synctrace.com
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_ADDR => 46.244.126.37
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_PORT => 80
+2012-10-04 11:21:57 [7214]:[4]verbs - 		REMOTE_ADDR => 94.226.36.213
+2012-10-04 11:21:57 [7214]:[4]verbs - 		DOCUMENT_ROOT => /var/www/prod_v23/
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_ADMIN => info@synctrace.com
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SCRIPT_FILENAME => /var/www/prod_v23/CrossProxy/crossproxy.php
+2012-10-04 11:21:57 [7214]:[4]verbs - 		REMOTE_PORT => 33023
+2012-10-04 11:21:57 [7214]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		REQUEST_METHOD => GET
+2012-10-04 11:21:57 [7214]:[4]verbs - 		QUERY_STRING => account=depolder&cmd=haltes&service=50
+2012-10-04 11:21:57 [7214]:[4]verbs - 		REQUEST_URI => /CrossProxy/crossproxy.php?account=depolder&cmd=haltes&service=50
+2012-10-04 11:21:57 [7214]:[4]verbs - 		SCRIPT_NAME => /CrossProxy/crossproxy.php
+2012-10-04 11:21:57 [7214]:[4]verbs - 		PHP_SELF => /CrossProxy/crossproxy.php
+2012-10-04 11:21:57 [7214]:[4]verbs - 		REQUEST_TIME => 1349342517
+2012-10-04 11:21:57 [7214]:[4]verbs - 		argv => Array
+2012-10-04 11:21:57 [7214]:[4]verbs - 		argc => 1
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::__construct - $_REQUEST information
+2012-10-04 11:21:57 [7214]:[4]verbs - 		account => depolder
+2012-10-04 11:21:57 [7214]:[4]verbs - 		cmd => haltes
+2012-10-04 11:21:57 [7214]:[4]verbs - 		service => 50
+2012-10-04 11:21:57 [7214]:[4]verbs - 		__utma => 191337256.1404275174.1322668580.1333375117.1334069697.40
+2012-10-04 11:21:57 [7214]:[4]verbs - 		__utmz => 191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::__construct - COOKIE information : __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::__construct - Request header information
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Host => www2.synctrace.com
+2012-10-04 11:21:57 [7214]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept-Encoding => gzip, deflate
+2012-10-04 11:21:57 [7214]:[5]dtail - 		DNT => 1
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Connection => keep-alive
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Cookie => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::execute - Validating user permissions...
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::execute - Prepare the backend request..
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::create_request - result: http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=haltes&service=50
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::create_request - filtering header : Host
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::create_request - filtering header : Connection
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::create_request - filtering header : Cookie
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
+2012-10-04 11:21:57 [7214]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
+2012-10-04 11:21:57 [7214]:[5]dtail - 		DNT => 1
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::execute - Perform request.
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::do_request - set curl GET options
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
+2012-10-04 11:21:57 [7214]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
+2012-10-04 11:21:57 [7214]:[5]dtail - 		DNT => 1
+2012-10-04 11:21:57 [7214]:[5]dtail - 		Accept-Encoding => gzip
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::do_request - Calling backend now!
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
+2012-10-04 11:21:57 [7214]:[4]verbs - 		url => http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=haltes&service=50
+2012-10-04 11:21:57 [7214]:[4]verbs - 		content_type => application/json; charset=utf-8
+2012-10-04 11:21:57 [7214]:[4]verbs - 		http_code => 200
+2012-10-04 11:21:57 [7214]:[4]verbs - 		header_size => 462
+2012-10-04 11:21:57 [7214]:[4]verbs - 		request_size => 474
+2012-10-04 11:21:57 [7214]:[4]verbs - 		filetime => -1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		ssl_verify_result => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		redirect_count => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		total_time => 0.027984
+2012-10-04 11:21:57 [7214]:[4]verbs - 		namelookup_time => 0.001879
+2012-10-04 11:21:57 [7214]:[4]verbs - 		connect_time => 0.011886
+2012-10-04 11:21:57 [7214]:[4]verbs - 		pretransfer_time => 0.011911
+2012-10-04 11:21:57 [7214]:[4]verbs - 		size_upload => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		size_download => 854
+2012-10-04 11:21:57 [7214]:[4]verbs - 		speed_download => 30517
+2012-10-04 11:21:57 [7214]:[4]verbs - 		speed_upload => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		download_content_length => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		upload_content_length => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		starttransfer_time => 0.027861
+2012-10-04 11:21:57 [7214]:[4]verbs - 		redirect_time => 0
+2012-10-04 11:21:57 [7214]:[4]verbs - 		request_header => GET /dev/class.planning.php?account=depolder&cmd=haltes&service=50 HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+Host: live.synctrace.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+Cookie: __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
+Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+
+
+2012-10-04 11:21:57 [7214]:[3]notic - CrossProxy::execute - Proxy Reply to client
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - Backend headers
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Server => nginx
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Date => Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Content-Type => application/json; charset=utf-8
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Transfer-Encoding => chunked
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Connection => keep-alive
+2012-10-04 11:21:57 [7214]:[4]verbs - 		X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Last-Modified => Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Pragma => no-cache
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Expires => Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Cache-Control => Array
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Content-Encoding => gzip
+2012-10-04 11:21:57 [7214]:[4]verbs - 		Vary => Accept-Encoding
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - 	length: 3724
+2012-10-04 11:21:57 [7214]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - Sending more headers
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Date: Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json; charset=utf-8
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Last-Modified: Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Pragma: no-cache
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Expires: Thu, 04 Oct 2012 09:21:57 GMT
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - sending header : Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - Done with the headers
+2012-10-04 11:21:57 [7214]:[4]verbs - CrossProxy::send_reply - BODY: {"0":{"lijn":"0","type":"0","halte_nr":"10","gemeente":"Beveren","halte_label":"BASF HOOFDINGANG","uur":"00:00","uur_v":null,"uur_l":null,"uur_n":null,"lat":"51.354879","lon":"4.278595"},"1":{"lijn":"50","type":"1","halte_nr":"2280","gemeente":"Brasschaat","halte_label":"Miksebaan 'De Vis'","uur":null,"uur_v":"4:59","uur_l":"12:54","uur_n":"20:59","lat":"51.294203","lon":"4.510156"},"2":{"lijn":"50","type":"1","halte_nr":"2290","gemeente":"Brasschaat","halte_label":"Pauwelslei 'Heislagsebaan'","uur":null,"uur_v":"5:00","uur_l":"12:55","uur_n":"21:00","lat":"51.304561","lon":"4.511454"},"3":{"lijn":"50","type":"1","halte_nr":"2300","gemeente":"Brasschaat","halte_label":"Bredabaan 'Torenhof'","uur":null,"uur_v":"5:02","uur_l":"12:57","uur_n":"21:02","lat":"51.303803","lon":"4.503729"},"4":{"lijn":"50","type":"1","halte_nr":"2310","gemeente":"Brasschaat","halte_label":"Bredabaan 'Prins Kavellei'","uur":null,"uur_v":"5:04","uur_l":"12:58","uur_n":"21:04","lat":"51.29638","lon":"4.497517"},"5":{"lijn":"50","type":"1","halte_nr":"2320","gemeente":"Brasschaat","halte_label":"Bredabaan 'Kerk Bredabaan'","uur":null,"uur_v":"5:06","uur_l":"13:03","uur_n":"21:06","lat":"51.29064","lon":"4.492341"},"6":{"lijn":"50","type":"1","halte_nr":"2330","gemeente":"Brasschaat","halte_label":"Augustijnslei thv Klina","uur":null,"uur_v":"5:07","uur_l":"13:04","uur_n":"21:07","lat":"51.2975","lon":"4.488532"},"7":{"lijn":"50","type":"1","halte_nr":"2340","gemeente":"Brasschaat","halte_label":"Augustijnslei 'Lage Kaart'","uur":null,"uur_v":"5:08","uur_l":"13:05","uur_n":"21:08","lat":"51.303467","lon":"4.485919"},"8":{"lijn":"50","type":"1","halte_nr":"2350","gemeente":"Brasschaat","halte_label":"Hoogbeemsteenweg 'Max Hermanlei'","uur":null,"uur_v":"5:09","uur_l":"13:06","uur_n":"21:09","lat":"51.309624","lon":"4.481982"},"9":{"lijn":"50","type":"1","halte_nr":"2360","gemeente":"Kapellen","halte_label":"Hoogbeemsteenweg 'Hoogboom Kerk'","uur":null,"uur_v":"5:10","uur_l":"13:07","uur_n":"21:10","lat":"51.315412","lon":"4.459945"},"10":{"lijn":"50","type":"1","halte_nr":"2370","gemeente":"Kapellen","halte_label":"Hoogbeemsteenweg 'Hoogboom Kazerne'","uur":null,"uur_v":"5:11","uur_l":"13:08","uur_n":"21:11","lat":"51.312334","lon":"4.451839"},"11":{"lijn":"50","type":"1","halte_nr":"2380","gemeente":"Kapellen","halte_label":"Hoogbeemsteenweg 'Kon. Astridlaan'","uur":null,"uur_v":"5:12","uur_l":"13:09","uur_n":"21:12","lat":"51.309373","lon":"4.445397"},"12":{"lijn":"50","type":"1","halte_nr":"2390","gemeente":"Kapellen","halte_label":"Antwerpsesteenweg 'Dorp'","uur":null,"uur_v":"5:14","uur_l":"13:11","uur_n":"21:14","lat":"51.31451","lon":"4.429459"},"13":{"lijn":"50","type":"1","halte_nr":"2400","gemeente":"Kapellen","halte_label":"Kapelsestraat 'Streepstraat'","uur":null,"uur_v":"5:16","uur_l":"13:13","uur_n":"21:16","lat":"51.318882","lon":"4.425913"},"14":{"lijn":"50","type":"1","halte_nr":"2410","gemeente":"Kapellen","halte_label":"Kapelsestraat 'Kalmthoutsesteenweg'","uur":null,"uur_v":"5:18","uur_l":"13:15","uur_n":"21:18","lat":"51.32915","lon":"4.415597"},"15":{"lijn":"50","type":"1","halte_nr":"2420","gemeente":"Kapellen","halte_label":"Kapelsestraat 'Pelgrimsstraat'","uur":null,"uur_v":"5:18","uur_l":"13:15","uur_n":"21:18","lat":"51.332871","lon":"4.411789"},"16":{"lijn":"50","type":"1","halte_nr":"2430","gemeente":"Kapellen","halte_label":"Kapelsestraat 'Waterstraat'","uur":null,"uur_v":"5:19","uur_l":"13:16","uur_n":"21:19","lat":"51.338491","lon":"4.406118"},"17":{"lijn":"50","type":"1","halte_nr":"2440","gemeente":"Kapellen","halte_label":"Ertbrandstraat 'Oude Galgenstraat'","uur":null,"uur_v":"5:20","uur_l":"13:17","uur_n":"21:20","lat":"51.342275","lon":"4.403023"}}
