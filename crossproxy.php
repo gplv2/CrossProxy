@@ -6,8 +6,8 @@
  * with this package in the file LICENSE.txt.
  */
 
-ini_set("zlib.output_compression", 'On');
-ini_set("zlib.output_compression_level", -1);
+// ini_set("zlib.output_compression", 'Off');
+// ini_set("zlib.output_compression_level", -1);
 
 $proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
 
@@ -29,39 +29,39 @@ class CrossProxy {
    );
 
    /* Store unprocessed $_REQUEST , kind of a misleading name imho , but makes sense in terms of POST/GET etc */
-   protected $_post_get = NULL;
+   protected $request_vars = NULL;
    /* Store unprocessed $_SERVER */
-   protected $_server = NULL;
+   protected $server = NULL;
    /* Store semi processed request headers works: (nginx / apache) */
-   protected $_request_headers        = NULL;
+   protected $request_headers        = NULL;
    /* Store unprocessed request cookie from $_COOKIE : (nginx / apache) */
-   protected $_request_cookie        = NULL;
+   protected $request_cookie        = NULL;
 
    /* Will hold the processed host info where proxy requests will be forwarded to (user option)*/
-   protected $_target_host       = NULL;
+   protected $target_host       = NULL;
    /* Will hold the target url path which will be added to this request (user option)*/
-   protected $_target_path       = NULL;
+   protected $target_path       = NULL;
 
    /* Will hold processed full target url */
-   protected $_target_url       = NULL;
+   protected $target_url       = NULL;
 
    /* Now use the power of curl_info for the backend headers */
-   protected $_backend_curl_info = NULL;
-   protected $_backend_output = NULL;
+   protected $backend_curl_info = NULL;
+   protected $backend_output = NULL;
 
    /* Will hold the response body/header sent back by the server that the proxy request was made to */
-   protected $_backend_response_body      = NULL;
-   protected $_backend_response_headers   = NULL;
+   protected $backend_response_body      = NULL;
+   protected $backend_response_headers   = NULL;
 
-   protected $_debug        = NULL;
-   protected $_verbose      = 0;
+   protected $debug        = NULL;
+   protected $verbose      = 0;
 
    private   $fp_logfile    = NULL;
 
-   public function  __construct( $forward_host, $allowed_hostnames = NULL, $handle_errors = FALSE, $conf_settings=array()) {
+   public function __construct( $forward_host, $allowed_hostnames = NULL, $handle_errors = FALSE, $conf_settings=array()) {
 
       if($handle_errors) {
-         $this->_setErrorHandlers();
+         $this->setErrorHandlers();
       }
 
       /* Check for cURL. period. the rest blows up */
@@ -77,62 +77,63 @@ class CrossProxy {
       }
 
       if (!empty($this->settings['debug'])) {
-         $this->_debug=1;
+         $this->debug=1;
       }
 
       if (!empty($this->settings['verbose'])) {
-         $this->_verbose=$this->settings['verbose'];
+         $this->verbose=$this->settings['verbose'];
       }
 
       if (!empty($this->settings['logfile'])) {
-         if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s : %s", __METHOD__ , 'Opening log file', $this->settings['logfile'])); } 
 
          $this->fp_logfile = fopen($this->settings['logfile'], 'w+');
+         if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s : %s", __METHOD__ , 'Opening log file', $this->settings['logfile'])); } 
+
          if (!is_resource($this->fp_logfile)) {
             trigger_error('log file write problem'); exit;
          }
       }
 
-      if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Start, Parsing target host info')); } 
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Start, Parsing target host info')); } 
       /* Parse the forward host option */
       if (is_array($forward_host)) {
-         list($this->_target_host, $this->_target_path )= array_values($forward_host);
+         list($this->target_host, $this->target_path )= array_values($forward_host);
       } else {
-         $this->_target_host = $forward_host;
+         $this->target_host = $forward_host;
       }
 
       /* Parse the allowed hostnames */
       if($allowed_hostnames !== NULL) {
          if(is_array($allowed_hostnames)) {
-            $this->_allowed_hostnames = $allowed_hostnames;
+            $this->allowed_hostnames = $allowed_hostnames;
          } else {
-            $this->_allowed_hostnames[] =$allowed_hostnames;
+            $this->allowed_hostnames[] =$allowed_hostnames;
          }
       }
 
       /* Store the SERVER method since we will tailor it */
-      // if (!empty($this->_debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing _SERVER var info')); } 
+      // if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing _SERVER var info')); } 
       if(is_array($_SERVER)) {
-         $this->_server = $_SERVER;
+         $this->server = $_SERVER;
       } else {
          header("HTTP/1.1 403 Forbidden");
          throw new Exception("Empty server vars look very suspicious");
          die();
       }
 
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_SERVER information')); }
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_server,true))); }
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_SERVER information')); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->server,true))); }
 
       /* Store the REQUEST info since we will tailor it */
       if(is_array($_REQUEST)) {
-         //print_r($_REQUEST); exit;
-         $this->_post_get = $_REQUEST;
+         //print_r($REQUEST); exit;
+         $this->request_vars = $_REQUEST;
       } else {
-         $this->_post_get = array();
+         $this->request_vars = array();
       }
 
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_REQUEST information')); }
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_post_get,true))); }
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , '$_REQUEST information')); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->request_vars,true))); }
 
       /* We can't live without 'real' user agents strings */
       if(!$this->get_srv_key('HTTP_USER_AGENT')) {
@@ -143,11 +144,11 @@ class CrossProxy {
 
       /* get cookies */
       if ($this->get_srv_key('HTTP_COOKIE')) {
-         // $this->_request_cookies = $_COOKIE; // Better is SRV HTTP_COOKIE
-         $this->_request_cookies = $this->get_srv_key('HTTP_COOKIE');
+         // $this->request_cookies = $_COOKIE; // Better is SRV HTTP_COOKIE
+         $this->request_cookies = $this->get_srv_key('HTTP_COOKIE');
       }
 
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'COOKIE information', $this->_request_cookies)); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'COOKIE information', $this->request_cookies)); }
 
       /* Starting from version 5.4.0 , php-fastcgi will support the getallheaders function 
        * $phpVersion = phpversion();
@@ -159,25 +160,25 @@ class CrossProxy {
       /* Store the request headers From the request */
       /* for older php-fastcgi nginx support */
       if (!function_exists('getallheaders')) {
-         foreach ($this->_server as $name => $value) {
+         foreach ($this->server as $name => $value) {
             /* RFC2616 (HTTP/1.1) defines header fields as case-insensitive entities. */
             if (strtolower(substr($name, 0, 5)) == 'http_') {
                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
             }
          }
-         $this->_request_headers=$headers;
+         $this->request_headers=$headers;
       } else {
          /* for apache support */
-         $this->_request_headers = getallheaders();
+         $this->request_headers = getallheaders();
       }
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'Request header information')); }
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->_request_headers,true))); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , 'Request header information')); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s", __METHOD__ , print_r($this->request_headers,true))); }
 
-      if ($this->get_req_key('Accept-Encoding')) {
-         unset($_request_headers['Accept-Encoding']);
+      if ($this->get_hdr_key('Accept-Encoding')) {
+         unset($request_headers['Accept-Encoding']);
       }
 
-      if($this->_request_headers === FALSE) {
+      if($this->request_headers === FALSE) {
          header("HTTP/1.1 412 Precondition Failed"); 
          throw new Exception("Could not get request headers");
          die();
@@ -196,42 +197,43 @@ class CrossProxy {
          throw new Exception("Request method ($method) invalid");
          die();
       }
-      $this->_request_method=$method;
+      $this->request_method=$method;
 
-      if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'Incomming request method', $this->_request_method)); }
+      if (!empty($this->debug)) { $this->trace(5, sprintf("%s - %s : %s", __METHOD__ , 'Incomming request method', $this->request_method)); }
 
-      if($this->_request_method === self::POST || $this->_request_method === self::PUT) {
-         if (!empty($this->_debug)) { $this->trace(5, sprintf("%s - Reading %s php input", __METHOD__ , $this->_request_method)); }
-         $this->_request_body = @file_get_contents('php://input');
+      if($this->request_method === self::POST || $this->request_method === self::PUT) {
+         if (!empty($this->debug)) { $this->trace(5, sprintf("%s - Reading %s php input", __METHOD__ , $this->request_method)); }
+         $this->request_body = @file_get_contents('php://input');
       }
-
+/* FIXME
       if (!$this->get_req_key('Content-Type')) {
-         $this->_request_content_type = $this->get_req_key('Content-Type');
+         $this->request_content_type = $this->get_req_key('Content-Type');
       }
+ */
 
       $this->execute();
 
    }
 
    private function get_req_key($name) {
-      if(key_exists($name, $this->_post_get)) {
-         return($this->_post_get[$name]);
+      if(key_exists($name, $this->request_vars)) {
+         return($this->request_vars[$name]);
       } else {
          return null;
       }
    }
 
    private function get_hdr_key($name) {
-      if(key_exists($name, $this->_request_headers)) {
-         return($this->_request_headers[$name]);
+      if(key_exists($name, $this->request_headers)) {
+         return($this->request_headers[$name]);
       } else {
          return null;
       }
    }
 
    private function get_srv_key($name) {
-      if(key_exists($name, $this->_server)) {
-         return($this->_server[$name]);
+      if(key_exists($name, $this->server)) {
+         return($this->server[$name]);
       } else {
          return null;
       }
@@ -244,15 +246,15 @@ class CrossProxy {
     *  sent.
     */
    protected function execute() {
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating user permissions...')); }
-      $this->_validate_user_permissions();
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Prepare the backend request..')); }
-      $this->_create_request();
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Perform request.')); }
-      $this->_do_request();
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Proxy Reply to client')); }
-      $this->_send_reply();
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Done')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating user permissions...')); }
+      $this->validate_user_permissions();
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Prepare the backend request..')); }
+      $this->create_request();
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Perform request.')); }
+      $this->do_request();
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Proxy Reply to client')); }
+      $this->send_reply();
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Done')); }
    }
 
    /**
@@ -261,13 +263,13 @@ class CrossProxy {
     * @return void
     * @throws Exception when a client hostname is not permitted on a request
     */
-   protected function _validate_user_permissions() {
+   protected function validate_user_permissions() {
 
-      if($this->_allowed_hostnames === NULL) {
+      if($this->allowed_hostnames === NULL) {
          return;
       }
 
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating request source.')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating request source.')); }
       $host=array();
       /* Validate the request source */
       if ($this->get_srv_key('REMOTE_HOST')) {
@@ -275,10 +277,9 @@ class CrossProxy {
       } elseif ($this->get_srv_key('REMOTE_ADDR')) {
          $host = $this->get_srv_key('REMOTE_ADDR');
       } else {
-
          if (!empty($host)) {
-            if(!in_array($host, $this->_allowed_hostnames))
-               if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Access denied')); }
+            if(!in_array($host, $this->allowed_hostnames))
+               if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Access denied')); }
                header("HTTP/1.1 403 Forbidden");
             throw new Exception("Requests from hostname ($host) are not allowed");
             die();
@@ -290,24 +291,24 @@ class CrossProxy {
     * Make the proxy request using the supplied route and the base host we got
     *  in the constructor. Store the response in _raw_response
     */
-   protected function _create_request() { 
+   protected function create_request() { 
 
-      $url = $this->_target_host;
+      $url = $this->target_host;
 
-      if (isset($this->_target_path)) {
-         $url = sprintf("%s/%s",$url, $this->_target_path);
+      if (isset($this->target_path)) {
+         $url = sprintf("%s/%s",$url, $this->target_path);
       }
 
       /* GET support, it's easy when just piping along the encoded source qry string */
-      if($this->_request_method === self::GET) {
+      if($this->request_method === self::GET) {
          if ($this->get_srv_key('QUERY_STRING')) {
             $url = sprintf("%s?%s",$url, $this->get_srv_key('QUERY_STRING'));
          }
       }
 
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - result: %s", __METHOD__ , $url)); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - result: %s", __METHOD__ , $url)); }
 
-      $this->_target_url = $url;
+      $this->target_url = $url;
    }
 
    /**
@@ -316,18 +317,20 @@ class CrossProxy {
     * @param string $url The url to make the request to
     * @return string The full HTTP response
     */
-   protected function _do_request() {
-      $ch = curl_init($this->_target_url);
+   protected function do_request() {
+      $ch = curl_init($this->target_url);
       $fh=null;
 
       /* POST */
-      if (!empty($this->_debug)) { $this->trace(3, sprintf("%s - set curl %s options", __METHOD__ , $this->_request_method)); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - set curl %s options", __METHOD__ , $this->request_method)); }
 
-      if($this->_request_method === self::POST) {
+      /* Enable the decoding of output for all methods */
+      curl_setopt($ch, CURLOPT_ENCODING, "");
+
+      if($this->request_method === self::POST) {
          curl_setopt($ch, CURLOPT_POST, true);
-         curl_setopt($ch, CURLOPT_ENCODING, "");
-         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_request_body);
-      } elseif($this->_request_method === self::PUT) {
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->request_body);
+      } elseif($this->request_method === self::PUT) {
 
          /* PUT */
          /** 
@@ -337,9 +340,9 @@ class CrossProxy {
 
          $fh = fopen('php://memory', 'rw');
 
-         $requestLength = strlen($this->_request_body);
+         $requestLength = strlen($this->request_body);
 
-         fwrite($fh, $this->_request_body);
+         fwrite($fh, $this->request_body);
          rewind($fh);
 
          curl_setopt($ch, CURLOPT_PUT, true);
@@ -348,7 +351,7 @@ class CrossProxy {
          if (is_resource($fh)) {
             fclose($fh);
          }
-      } elseif($this->_request_method === self::DELETE) {
+      } elseif($this->request_method === self::DELETE) {
          /* DELETE */
          curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::DELETE);
       } else {
@@ -366,14 +369,17 @@ class CrossProxy {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
       if ($this->get_req_key('Cookie')) {
-         curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
+         // curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
+         curl_setopt($ch, CURLOPT_COOKIE, $this->request_cookies );
       }
 
       /* We accept compressed input from the backend */ 
       //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept-Encoding: gzip'));
 
       /* An array of HTTP header fields to set, in the format array('Content-type: text/plain', 'Content-length: 100') */
-      // FIXME // curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_generateProxyRequestHeaders());
+      // FIXME // curl_setopt($ch, CURLOPT_HTTPHEADER, $this->generateProxyRequestHeaders());
+      
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Have these headers for curl request'), $this->request_headers); } 
 
 /*
      // Accept: 
@@ -388,46 +394,53 @@ class CrossProxy {
          curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, $this->settings['curl_connecttimeout_ms']);
       }
 
-      $this->_backend_output = curl_exec($ch);
-      $this->_backend_curl_info = curl_getinfo($ch);
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Calling backend now!')); } 
+      $this->backend_output = curl_exec($ch);
+      $this->backend_curl_info = curl_getinfo($ch);
 
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - curl_info output", __METHOD__), $this->_backend_curl_info); }
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - curl_info output", __METHOD__), $this->backend_curl_info); }
 
    }
 
-   protected function _send_reply() {
-      if (!$this->_backend_curl_info['http_code']==200) {
+   protected function send_reply() {
+      if (!$this->backend_curl_info['http_code']==200) {
          /*
-         if (preg_match("/utf-8/", strtolower($this->_backend_curl_info['content_type']), $matches)) {
+         if (preg_match("/utf-8/", strtolower($this->backend_curl_info['content_type']), $matches)) {
             if (!empty($matches[0])) {
-               $contents = utf8_encode($this->_backend_output);
+               $contents = utf8_encode($this->backend_output);
             }
          } else {
-            $contents = $this->_backend_output;
+            $contents = $this->backend_output;
          }
           */
 
-         // echo $this->_backend_output;
+         // echo $this->backend_output;
          //ob_end_flush();
       }
-      list( $headers, $this->_backend_response_body) =  explode("\r\n\r\n", $this->_backend_output, 2);
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Splitting header/body of curl reply')); } 
+
+      list( $headers, $this->backend_response_body) =  explode("\r\n\r\n", $this->backend_output, 2);
       // Can also be done like this (but keeps the \r\n\r\n somewhere in the resultset):
       // $header=substr($result,0,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
       // $body=substr($result,curl_getinfo($ch,CURLINFO_HEADER_SIZE));
 
       /* I don't like the pecl one ...
       if(function_exists('http_parse_headers')) {
-         $this->_backend_response_headers = http_parse_headers($headers);
+         $this->backend_response_headers = http_parse_headers($headers);
       }
       * */
-      $this->_backend_response_headers = $this->custom_http_parse_headers($headers);
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Parsing reply headers')); } 
+      $this->backend_response_headers = $this->custom_http_parse_headers($headers);
 
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend headers", __METHOD__), $this->_backend_response_headers); }
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - backend body", __METHOD__)); }
-      if (!empty($this->_debug)) { $this->trace(4, sprintf("%s - \tlength: %s", __METHOD__, strlen($this->_backend_response_body))); }
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Sending status')); } 
+      header(sprintf("HTTP/1.1 %d %s",$this->backend_curl_info['http_code'],$this->get_code_definition($this->backend_curl_info['http_code'])));
 
-      // header(sprintf("HTTP/1.1 %d %s",$this->_backend_curl_info['http_code'],$this->get_code_definition($this->_backend_curl_info['http_code'])));
-      foreach($this->_backend_response_headers as $key => $header) {
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - backend headers", __METHOD__), $this->backend_response_headers); }
+      //if (!empty($this->debug)) { $this->trace(4, sprintf("%s - backend body", __METHOD__)); }
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - \tlength: %s", __METHOD__, strlen($this->backend_response_body))); }
+
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - sending headers", __METHOD__)); }
+      foreach($this->backend_response_headers as $key => $header) {
          if (!is_array($header)) {
             header("$key: $header",true);
          } else {
@@ -439,15 +452,19 @@ class CrossProxy {
       /*
        */
       header("Glenn: washere",true);
+
+      if (!empty($this->debug)) { $this->trace(4, sprintf("%s - Done with headers", __METHOD__)); }
       // var_dump(headers_list());
       // exit;
-      if (isset($this->_backend_response_body)) {
-         //echo $this->_backend_response_body;
+
+      if (isset($this->backend_response_body)) {
+         if (!empty($this->debug)) { $this->trace(4, sprintf("%s - Sending body back", __METHOD__)); }
+         //echo $this->backend_response_body;
          //die();
       }
    }
 
-   protected function _setErrorHandlers() {
+   protected function setErrorHandlers() {
       set_error_handler(array($this, 'handleError'));
       set_exception_handler(array($this, 'handleException'));
    }
@@ -462,8 +479,8 @@ class CrossProxy {
     */
    public function handleError($code, $message, $file, $line) {
       // Be scarse on error info
-      // $this->_sendFatalError("Fatal proxy Error: '$message' in $file:$line");
-      $this->_sendFatalError("Fatal Error: '$message'");
+      // $this->sendFatalError("Fatal proxy Error: '$message' in $file:$line");
+      $this->sendFatalError("Fatal Error: '$message'");
    }
 
    /**
@@ -473,7 +490,7 @@ class CrossProxy {
     */
    public function handleException(Exception $exception)
       {
-      $this->_sendFatalError("Fatal Exception: '" . $exception->getMessage());
+      $this->sendFatalError("Fatal Exception: '" . $exception->getMessage());
       /*
        * I don't want to hand out line information to an end user
        . "' in "
@@ -487,7 +504,7 @@ class CrossProxy {
     * Display a fatal error to the user. This will halt execution.
     * @param string $message
     */
-   protected static function _sendFatalError($message) {
+   protected static function sendFatalError($message) {
       die($message);
    }
 
@@ -593,7 +610,7 @@ class CrossProxy {
    }
 
    private function trace($level, $msg) {
-      if (empty($this->_debug) || empty($this->_verbose) || empty($level) || empty($msg)) { return; }
+      if (empty($this->debug) || empty($this->verbose) || empty($level) || empty($msg)) { return; }
 
       $out_array = array ();
       $numargs = func_num_args();
@@ -606,7 +623,7 @@ class CrossProxy {
 
       $DateTime=@date('Y-m-d H:i:s', time());
 
-      if ( $level <= $this->_verbose ) {
+      if ( $level <= $this->verbose ) {
          $mylvl=NULL;
          switch($level) {
             case 0:
