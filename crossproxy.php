@@ -204,18 +204,13 @@ class CrossProxy {
          if (!empty($this->debug)) { $this->trace(5, sprintf("%s - Reading %s php input", __METHOD__ , $this->request_method)); }
          $this->request_body = @file_get_contents('php://input');
       }
+      // Options request are related to cross domain functionality, we could do some more with this later
       if( $this->request_method === self::OPTIONS ) {
          if (!empty($this->debug)) { $this->trace(4, sprintf("%s - %s", __METHOD__ , 'OPTIONS request: '), $this->request_vars); }
          die();
       }
-/* FIXME
-      if (!$this->get_req_key('Content-Type')) {
-         $this->request_content_type = $this->get_req_key('Content-Type');
-      }
- */
 
       $this->execute();
-
    }
 
    private function get_req_key($name) {
@@ -242,31 +237,18 @@ class CrossProxy {
       }
    }
 
-
-   /**
-    * Execute the proxy request. This method sets HTTP headers and write to the
-    *  output stream. Make sure that no whitespace or headers have already been
-    *  sent.
-    */
-
    protected function execute() {
-      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Validating user permissions...')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , '1. Validating user permissions...')); }
       $this->validate_user_permissions();
-      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Prepare the backend request..')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , '2. Prepare the backend request..')); }
       $this->create_request();
-      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Perform request.')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , '3. Perform request.')); }
       $this->do_request();
-      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Proxy Reply to client')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , '4. Proxy Reply to client')); }
       $this->send_reply();
-      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , 'Done')); }
+      if (!empty($this->debug)) { $this->trace(3, sprintf("%s - %s", __METHOD__ , '5. Done')); }
    }
 
-   /**
-    * Check that the proxy request is coming from the appropriate host
-    *  that was set in the second argument of the constructor
-    * @return void
-    * @throws Exception when a client hostname is not permitted on a request
-    */
    protected function validate_user_permissions() {
 
       if($this->allowed_hostnames === NULL) {
@@ -291,10 +273,6 @@ class CrossProxy {
       }
    }
 
-   /**
-    * Make the proxy request using the supplied route and the base host we got
-    *  in the constructor. Store the response in _raw_response
-    */
    protected function create_request() { 
 
       $url = $this->target_host;
@@ -330,12 +308,6 @@ class CrossProxy {
       // $this->backend_request_headers;
    }
 
-   /**
-    * Given the object's current settings, make a request to the given url
-    *  using the cURL library
-    * @param string $url The url to make the request to
-    * @return string The full HTTP response
-    */
    protected function do_request() {
       $ch = curl_init($this->target_url);
       $fh=null;
@@ -386,6 +358,7 @@ class CrossProxy {
       /* TRUE to return the transfer as a string of the return value of curl_exec() instead of outputting it out directly. */
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Setting curl cookie')); } 
       if (!empty($this->request_cookies)) {
          // curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
          curl_setopt($ch, CURLOPT_COOKIE, $this->request_cookies );
@@ -455,11 +428,11 @@ class CrossProxy {
       //if (!empty($this->debug)) { $this->trace(4, sprintf("%s - backend body", __METHOD__)); }
       if (!empty($this->debug)) { $this->trace(4, sprintf("%s - \tlength: %s", __METHOD__, strlen($this->backend_response_body))); }
 
-      // Filter out response headers
       if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Sending HTTP status header')); } 
       header(sprintf("HTTP/1.1 %d %s",$this->backend_curl_info['http_code'],$this->get_code_definition($this->backend_curl_info['http_code'])));
       if (!empty($this->debug)) { $this->trace(4, sprintf("%s - Sending more headers", __METHOD__)); }
 
+      // Filter out response headers that create errors when we send them back blindly
       foreach($this->backend_response_headers as $key => $header) {
          if (in_array($key, array('Server', 'Transfer-Encoding', 'Content-Encoding', 'Vary','Content-Length','Connection'))) {
             continue;
@@ -484,13 +457,12 @@ class CrossProxy {
       if (isset($this->backend_response_body)) {
          if (!empty($this->debug)) { $this->trace(4, sprintf("%s - BODY: %s", __METHOD__, $this->backend_response_body)); }
          echo $this->backend_response_body;
-         exit;
       }
    }
 
    protected function setErrorHandlers() {
-      set_error_handler(array($this, 'handleError'));
-      set_exception_handler(array($this, 'handleException'));
+      set_error_handler(array($this, 'handle_error'));
+      set_exception_handler(array($this, 'handle_exception'));
    }
 
    /**
@@ -501,10 +473,10 @@ class CrossProxy {
     * @param string    $file
     * @param int       $line
     */
-   public function handleError($code, $message, $file, $line) {
+   public function handle_error($code, $message, $file, $line) {
       // Be scarse on error info
-      // $this->sendFatalError("Fatal proxy Error: '$message' in $file:$line");
-      $this->sendFatalError("Fatal Error: '$message'");
+      // $this->send_fatal_error("Fatal proxy Error: '$message' in $file:$line");
+      $this->send_fatal_error("Fatal Error: '$message'");
    }
 
    /**
@@ -512,9 +484,9 @@ class CrossProxy {
     *  handle application-wide exceptions.
     * @param Exception $exception The exception being thrown
     */
-   public function handleException(Exception $exception)
+   public function handle_exception(Exception $exception)
       {
-      $this->sendFatalError("Fatal Exception: '" . $exception->getMessage());
+      $this->send_fatal_error("Fatal Exception: '" . $exception->getMessage());
       /*
        * I don't want to hand out line information to an end user
        . "' in "
@@ -528,42 +500,10 @@ class CrossProxy {
     * Display a fatal error to the user. This will halt execution.
     * @param string $message
     */
-   protected static function sendFatalError($message) {
+   protected static function send_fatal_error($message) {
       die($message);
    }
 
-/*
-   // Include this function on your pages
-   private function gzip_output() {
-
-      global $HTTP_ACCEPT_ENCODING;
-
-      if( headers_sent() ){
-         $encoding = false;
-      }elseif( strpos($HTTP_ACCEPT_ENCODING, 'x-gzip') !== false ){
-         $encoding = 'x-gzip';
-      }elseif( strpos($HTTP_ACCEPT_ENCODING,'gzip') !== false ){
-         $encoding = 'gzip';
-      }else{
-         $encoding = false;
-      }
-
-      if( $encoding ){
-         $contents = ob_get_contents();
-         ob_end_clean();
-         header('Content-Encoding: '.$encoding);
-         print("\x1f\x8b\x08\x00\x00\x00\x00\x00");
-         $size = strlen($contents);
-         $contents = gzcompress($contents, 9);
-         $contents = substr($contents, 0, $size);
-         print($contents);
-         exit();
-      }else{
-         ob_end_flush();
-         exit();
-      }
-   }
- */
    private function get_code_definition($code) {
       // see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html RFC2616
       // [Informational 1xx]
