@@ -6,8 +6,11 @@
  * with this package in the file LICENSE.txt.
  */
 
-// ini_set("zlib.output_compression", 'Off');
-// ini_set("zlib.output_compression_level", -1);
+/* This takes care of the compression towards the client , it's that simple ...
+*/
+
+ini_set("zlib.output_compression", 1);
+ini_set("zlib.output_compression_level", 9);
 
 $proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
 
