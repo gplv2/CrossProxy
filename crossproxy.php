@@ -386,6 +386,7 @@ class CrossProxy {
       /* TRUE to return the transfer as a string of the return value of curl_exec() instead of outputting it out directly. */
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
+      if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Setting curl cookie')); } 
       if (!empty($this->request_cookies)) {
          // curl_setopt($ch, CURLOPT_COOKIE, $this->get_req_key('Cookie'));
          curl_setopt($ch, CURLOPT_COOKIE, $this->request_cookies );
