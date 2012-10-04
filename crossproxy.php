@@ -93,7 +93,7 @@ class CrossProxy {
 
       if (!empty($this->settings['logfile'])) {
 
-         $this->fp_logfile = fopen($this->settings['logfile'], 'w');
+         $this->fp_logfile = fopen($this->settings['logfile'], 'a+');
          if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s : %s", __METHOD__ , 'Opening log file', $this->settings['logfile'])); } 
 
          if (!is_resource($this->fp_logfile)) {
