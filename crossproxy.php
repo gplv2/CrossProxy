@@ -26,6 +26,7 @@ class CrossProxy {
    protected $settings= array(
       'curl_connecttimeout' => '5',
       'curl_connecttimeout_ms' => '5000',
+      'no_cache_headers' => 1,
       'debug' => 1,
       'verbose' => 5,
       'logfile' => 'proxy.log',
@@ -297,18 +298,12 @@ class CrossProxy {
       $this->backend_request_headers=array();
 
       foreach($this->request_headers as $key => $header) {
-         if (in_array($key, array('Cookie', 'Host', 'Accept-Encoding','Content-Encoding', 'Vary','Content-Length','Connection'))) {
+         if (in_array($key, array('Cookie', 'Host', 'Accept-Encoding','Content-Encoding', 'Vary','Content-Length','Connection','Pragma','Cache-Control','Expires','Keep-Alive'))) {
             if (!empty($this->debug)) { $this->trace(3, sprintf("%s - filtering header : %s", __METHOD__ , $key)); }
             continue;
          }
          $this->backend_request_headers[$key]=$header;
       }
-      if(empty($this->backend_request_headers['X-Forwarded-For'])) {
-         $this->backend_request_headers['X-Forwarded-For'] = $this->get_srv_key('REMOTE_ADDR');
-      } else {
-         $this->backend_request_headers['X-Forwarded-For'] .= ', ' .$this->get_srv_key('REMOTE_ADDR');
-      }
-
       if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s: ", __METHOD__ , 'Backend request headers: '), $this->backend_request_headers); } 
 
       // $this->backend_request_headers;
@@ -440,7 +435,7 @@ class CrossProxy {
 
       // Filter out response headers that create errors when we send them back blindly
       foreach($this->backend_response_headers as $key => $header) {
-         if (in_array($key, array('Server', 'Transfer-Encoding', 'Content-Encoding', 'Vary','Content-Length','Connection'))) {
+         if (in_array($key, array('Server', 'Transfer-Encoding', 'Content-Encoding', 'Vary','Content-Length','Connection','Pragma','Cache-Control','Expires','Keep-Alive'))) {
             continue;
          }
 
@@ -452,9 +447,18 @@ class CrossProxy {
          if (!empty($this->debug)) { $this->trace(4, sprintf("%s - sending header : %s", __METHOD__, $hd)); }
          header($hd,true);
       }
-      /*
-      header("Glenn: washere",true);
-      */
+
+      /* Remove the headers that tell browsers to cache this result set */
+      if (!empty($this->settings['no_cache_headers'])) {
+         if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s", __METHOD__ , 'Inserting/Replacing cache related headers')); } 
+         /* de-cachy-fy the source headers , this combination has proven effective for me since 2007
+          */
+         $headexpires = gmdate('D, d M Y H:i:s') . " GMT";
+         header(sprintf("Pragma: no-cache"),true);
+         header(sprintf("Last-Modified: %s", $headexpires),true);
+         header(sprintf("Expires: %s" , $headexpires),true);
+         header(sprintf("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"),true);
+      }
 
       if (!empty($this->debug)) { $this->trace(4, sprintf("%s - Done with the headers", __METHOD__)); }
       // var_dump(headers_list());
