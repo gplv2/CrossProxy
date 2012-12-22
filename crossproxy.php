@@ -304,6 +304,13 @@ class CrossProxy {
          }
          $this->backend_request_headers[$key]=$header;
       }
+
+      if(empty($this->backend_request_headers['X-Forwarded-For'])) {
+         $this->backend_request_headers['X-Forwarded-For'] = $this->get_srv_key('REMOTE_ADDR');
+      } else {
+         $this->backend_request_headers['X-Forwarded-For'] .= ', ' .$this->get_srv_key('REMOTE_ADDR');
+      }
+
       if (!empty($this->debug)) { $this->trace(5,sprintf("%s - %s: ", __METHOD__ , 'Backend request headers: '), $this->backend_request_headers); } 
 
       // $this->backend_request_headers;
