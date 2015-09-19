@@ -12,7 +12,38 @@
 ini_set("zlib.output_compression", 1);
 ini_set("zlib.output_compression_level", 9);
 
-$proxy = new CrossProxy(array('http://live.synctrace.com','dev/class.planning.php'));
+/*
+CrossProxy class' constructor takes 4 arguments, only the first is required.
+
+1. $forward_host, which is where all requests to the proxy will be routed. 
+   when this is an array, the second part will be appended to the target url (invisible to frontend calling the proxy) 
+   before calling the backend.
+
+2. $allowed_hostname, which an optional parameter. Is this is supplied, it should be a hostname or ip address 
+   that you would like to restrict requests to. It can be an array of hostnames or IPs.
+
+3. $handle_errors, which is a boolean flag with a default value of TRUE. If enabled, the object will use it's own error and exception handlers. handling in your application.
+
+4.  array of optional options.
+
+
+So in order proxy the following call:
+
+    http://warner.stage.ott.mytargetdomain.com/streaming/getckc?CrmId=warner&AccountId=warner&ContentId=GHBCNND_123
+
+You can set it up like this:
+
+    $proxy = new CrossProxy(array('http://warner.stage.ott.mytargetdomain.com','streaming/getckc'));
+
+The second array value (the url path) will be hidden from the client.  So lets imagine you hosted this locally on your computer on a webserver, 
+with the above configuration mapping you can call: 
+
+    http://localhost/crossproxy.php?CrmId=warner&AccountId=warner&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+
+*/
+
+
+$proxy = new CrossProxy(array('http://warner.stage.ott.mytargetdomain.com','streaming/getckc'));
 
 class CrossProxy {
 
@@ -38,33 +69,33 @@ class CrossProxy {
    /* Store unprocessed $_SERVER */
    protected $server = NULL;
    /* Store semi processed request headers works: (nginx / apache) */
-   protected $request_headers        = NULL;
+   protected $request_headers = NULL;
    /* Store unprocessed request cookie from $_COOKIE : (nginx / apache) */
-   protected $request_cookie        = NULL;
-
+   protected $request_cookie = NULL;
+    
    /* Will hold the processed host info where proxy requests will be forwarded to (user option)*/
-   protected $target_host       = NULL;
+   protected $target_host = NULL;
    /* Will hold the target url path which will be added to this request (user option)*/
-   protected $target_path       = NULL;
+   protected $target_path = NULL;
 
    /* Will hold processed full target url */
-   protected $target_url       = NULL;
+   protected $target_url = NULL;
 
    /* Now use the power of curl_info for the backend headers */
    protected $backend_curl_info = NULL;
    protected $backend_output = NULL;
 
    /* Will hold the header we will sent to the backend server, created from the frontend client request */
-   protected $backend_request_headers   = NULL;
+   protected $backend_request_headers = NULL;
 
    /* Will hold the response body/header sent back by the server that the proxy request was made to */
-   protected $backend_response_body      = NULL;
-   protected $backend_response_headers   = NULL;
+   protected $backend_response_body = NULL;
+   protected $backend_response_headers = NULL;
 
-   protected $debug        = NULL;
-   protected $verbose      = 0;
+   protected $debug = NULL;
+   protected $verbose = 0;
 
-   private   $fp_logfile    = NULL;
+   private $fp_logfile = NULL;
 
    public function __construct( $forward_host, $allowed_hostnames = NULL, $handle_errors = FALSE, $conf_settings=array()) {
 
@@ -632,6 +663,7 @@ class CrossProxy {
          $content = $DateTime. " [" .  posix_getpid() ."]:[" . $level . "]" . $mylvl . " - " . $msg . "\n";
          if (count($out_array)) {
             foreach($out_array as $key => $val) {
+                //if (is_array($val)) { print_r($val); }
                $content .= $DateTime. " [" .  posix_getpid() ."]:[" . $level . "]" . $mylvl . " - \t\t" . $key ." => " . $val . "\n";
             }
          }

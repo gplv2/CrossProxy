@@ -1,439 +1,390 @@
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::__construct - $_SERVER information
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_HOST => www2.synctrace.com
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_ACCEPT => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en-us,en;q=0.5
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_DNT => 1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_CONNECTION => keep-alive
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_X_REQUESTED_WITH => XMLHttpRequest
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_REFERER => http://www2.synctrace.com/index.php?show=395&s=14455
-2012-10-04 19:15:05 [15417]:[4]verbs - 		HTTP_COOKIE => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:15:05 [15417]:[4]verbs - 		PATH => /usr/local/bin:/usr/bin:/bin
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_SIGNATURE => <address>Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch Server at www2.synctrace.com Port 80</address>
-
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_SOFTWARE => Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_NAME => www2.synctrace.com
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_ADDR => 46.244.126.37
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_PORT => 80
-2012-10-04 19:15:05 [15417]:[4]verbs - 		REMOTE_ADDR => 94.226.36.213
-2012-10-04 19:15:05 [15417]:[4]verbs - 		DOCUMENT_ROOT => /var/www/prod_v23/
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_ADMIN => info@synctrace.com
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SCRIPT_FILENAME => /var/www/prod_v23/CrossProxy/crossproxy.php
-2012-10-04 19:15:05 [15417]:[4]verbs - 		REMOTE_PORT => 41437
-2012-10-04 19:15:05 [15417]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		REQUEST_METHOD => GET
-2012-10-04 19:15:05 [15417]:[4]verbs - 		QUERY_STRING => account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370906432&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:15:05 [15417]:[4]verbs - 		REQUEST_URI => /CrossProxy/crossproxy.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370906432&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:15:05 [15417]:[4]verbs - 		SCRIPT_NAME => /CrossProxy/crossproxy.php
-2012-10-04 19:15:05 [15417]:[4]verbs - 		PHP_SELF => /CrossProxy/crossproxy.php
-2012-10-04 19:15:05 [15417]:[4]verbs - 		REQUEST_TIME => 1349370905
-2012-10-04 19:15:05 [15417]:[4]verbs - 		argv => Array
-2012-10-04 19:15:05 [15417]:[4]verbs - 		argc => 1
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::__construct - $_REQUEST information
-2012-10-04 19:15:05 [15417]:[4]verbs - 		account => depolder
-2012-10-04 19:15:05 [15417]:[4]verbs - 		cmd => planning
-2012-10-04 19:15:05 [15417]:[4]verbs - 		full => 1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		grid => true
-2012-10-04 19:15:05 [15417]:[4]verbs - 		_search => false
-2012-10-04 19:15:05 [15417]:[4]verbs - 		nd => 1349370906432
-2012-10-04 19:15:05 [15417]:[4]verbs - 		rows => 50
-2012-10-04 19:15:05 [15417]:[4]verbs - 		page => 1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		sidx => id
-2012-10-04 19:15:05 [15417]:[4]verbs - 		sord => desc
-2012-10-04 19:15:05 [15417]:[4]verbs - 		__utma => 191337256.1404275174.1322668580.1333375117.1334069697.40
-2012-10-04 19:15:05 [15417]:[4]verbs - 		__utmz => 191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
-2012-10-04 19:15:05 [15417]:[4]verbs - 		sessionkey => 8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::__construct - COOKIE information : __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::__construct - Request header information
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Host => www2.synctrace.com
-2012-10-04 19:15:05 [15417]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept-Encoding => gzip, deflate
-2012-10-04 19:15:05 [15417]:[5]dtail - 		DNT => 1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Connection => keep-alive
-2012-10-04 19:15:05 [15417]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=14455
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Cookie => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::execute - Validating user permissions...
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::execute - Prepare the backend request..
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::create_request - result: http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370906432&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::create_request - filtering header : Host
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::create_request - filtering header : Connection
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::create_request - filtering header : Cookie
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
-2012-10-04 19:15:05 [15417]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:15:05 [15417]:[5]dtail - 		DNT => 1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=14455
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::execute - Perform request.
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::do_request - set curl GET options
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
-2012-10-04 19:15:05 [15417]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:15:05 [15417]:[5]dtail - 		DNT => 1
-2012-10-04 19:15:05 [15417]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=14455
-2012-10-04 19:15:05 [15417]:[5]dtail - 		Accept-Encoding => gzip
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::do_request - Calling backend now!
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
-2012-10-04 19:15:05 [15417]:[4]verbs - 		url => http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370906432&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:15:05 [15417]:[4]verbs - 		content_type => application/json
-2012-10-04 19:15:05 [15417]:[4]verbs - 		http_code => 200
-2012-10-04 19:15:05 [15417]:[4]verbs - 		header_size => 447
-2012-10-04 19:15:05 [15417]:[4]verbs - 		request_size => 645
-2012-10-04 19:15:05 [15417]:[4]verbs - 		filetime => -1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		ssl_verify_result => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		redirect_count => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		total_time => 0.087596
-2012-10-04 19:15:05 [15417]:[4]verbs - 		namelookup_time => 0.002307
-2012-10-04 19:15:05 [15417]:[4]verbs - 		connect_time => 0.011991
-2012-10-04 19:15:05 [15417]:[4]verbs - 		pretransfer_time => 0.012012
-2012-10-04 19:15:05 [15417]:[4]verbs - 		size_upload => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		size_download => 740
-2012-10-04 19:15:05 [15417]:[4]verbs - 		speed_download => 8447
-2012-10-04 19:15:05 [15417]:[4]verbs - 		speed_upload => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		download_content_length => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		upload_content_length => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		starttransfer_time => 0.087454
-2012-10-04 19:15:05 [15417]:[4]verbs - 		redirect_time => 0
-2012-10-04 19:15:05 [15417]:[4]verbs - 		request_header => GET /dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370906432&rows=50&page=1&sidx=id&sord=desc HTTP/1.1
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::__construct - $_SERVER information
+2015-09-19 22:37:38 [26019]:[4]verbs - 		USER => www-data
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HOME => /var/www
+2015-09-19 22:37:38 [26019]:[4]verbs - 		FCGI_ROLE => RESPONDER
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SCRIPT_FILENAME => /home/glenn/repos/CrossProxy/crossproxy.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		QUERY_STRING => 
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REQUEST_METHOD => GET
+2015-09-19 22:37:38 [26019]:[4]verbs - 		CONTENT_TYPE => 
+2015-09-19 22:37:38 [26019]:[4]verbs - 		CONTENT_LENGTH => 
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SCRIPT_NAME => /crossproxy.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REQUEST_URI => /crossproxy.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		DOCUMENT_URI => /crossproxy.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		DOCUMENT_ROOT => /home/glenn/repos/CrossProxy
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SERVER_SOFTWARE => nginx/1.4.6
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REMOTE_ADDR => 127.0.0.1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REMOTE_PORT => 44555
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SERVER_ADDR => 127.0.0.1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SERVER_PORT => 80
+2015-09-19 22:37:38 [26019]:[4]verbs - 		SERVER_NAME => localhost
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REDIRECT_STATUS => 200
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_HOST => localhost
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_CONNECTION => keep-alive
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_CACHE_CONTROL => max-age=0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_ACCEPT => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_REFERER => http://localhost/
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate, sdch
+2015-09-19 22:37:38 [26019]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:37:38 [26019]:[4]verbs - 		PHP_SELF => /crossproxy.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REQUEST_TIME_FLOAT => 1442695058.0933
+2015-09-19 22:37:38 [26019]:[4]verbs - 		REQUEST_TIME => 1442695058
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::__construct - $_REQUEST information
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::__construct - COOKIE information : 
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::__construct - Request header information
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Host => localhost
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Connection => keep-alive
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Cache-Control => max-age=0
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:37:38 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Referer => http://localhost/
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept-Encoding => gzip, deflate, sdch
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::execute - 1. Validating user permissions...
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::execute - 2. Prepare the backend request..
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::create_request - result: http://live.synctrace.com/dev/class.planning.php
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::create_request - filtering header : Host
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::create_request - filtering header : Connection
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::create_request - filtering header : Cache-Control
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:37:38 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Referer => http://localhost/
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:37:38 [26019]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::execute - 3. Perform request.
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::do_request - set curl GET options
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::do_request - Setting curl cookie
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:37:38 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Referer => http://localhost/
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:37:38 [26019]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:37:38 [26019]:[5]dtail - 		Accept-Encoding => gzip
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::do_request - Calling backend now!
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
+2015-09-19 22:37:38 [26019]:[4]verbs - 		url => http://live.synctrace.com/dev/class.planning.php
+2015-09-19 22:37:38 [26019]:[4]verbs - 		content_type => text/html
+2015-09-19 22:37:38 [26019]:[4]verbs - 		http_code => 200
+2015-09-19 22:37:38 [26019]:[4]verbs - 		header_size => 462
+2015-09-19 22:37:38 [26019]:[4]verbs - 		request_size => 249
+2015-09-19 22:37:38 [26019]:[4]verbs - 		filetime => -1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		ssl_verify_result => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		redirect_count => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		total_time => 0.063795
+2015-09-19 22:37:38 [26019]:[4]verbs - 		namelookup_time => 0.028402
+2015-09-19 22:37:38 [26019]:[4]verbs - 		connect_time => 0.044402
+2015-09-19 22:37:38 [26019]:[4]verbs - 		pretransfer_time => 0.044494
+2015-09-19 22:37:38 [26019]:[4]verbs - 		size_upload => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		size_download => 73
+2015-09-19 22:37:38 [26019]:[4]verbs - 		speed_download => 1144
+2015-09-19 22:37:38 [26019]:[4]verbs - 		speed_upload => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		download_content_length => -1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		upload_content_length => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		starttransfer_time => 0.063726
+2015-09-19 22:37:38 [26019]:[4]verbs - 		redirect_time => 0
+2015-09-19 22:37:38 [26019]:[4]verbs - 		redirect_url => 
+2015-09-19 22:37:38 [26019]:[4]verbs - 		primary_ip => 178.79.174.226
+2015-09-19 22:37:38 [26019]:[4]verbs - 		certinfo => Array
+2015-09-19 22:37:38 [26019]:[4]verbs - 		primary_port => 80
+2015-09-19 22:37:38 [26019]:[4]verbs - 		local_ip => 192.168.1.111
+2015-09-19 22:37:38 [26019]:[4]verbs - 		local_port => 58801
+2015-09-19 22:37:38 [26019]:[4]verbs - 		request_header => GET /dev/class.planning.php HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
 Host: live.synctrace.com
 Accept: */*
 Accept-Encoding: deflate, gzip
-Cookie: __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-http://www2.synctrace.com/index.php?show=395&s=14455
+http://localhost/
 
 
-2012-10-04 19:15:05 [15417]:[3]notic - CrossProxy::execute - Proxy Reply to client
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - Backend headers
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Server => nginx
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Date => Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Content-Type => application/json
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Transfer-Encoding => chunked
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Connection => keep-alive
-2012-10-04 19:15:05 [15417]:[4]verbs - 		X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Last-Modified => Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Pragma => no-cache
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Expires => Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Cache-Control => Array
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Content-Encoding => gzip
-2012-10-04 19:15:05 [15417]:[4]verbs - 		Vary => Accept-Encoding
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - 	length: 4561
-2012-10-04 19:15:05 [15417]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - Sending more headers
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Date: Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Last-Modified: Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Pragma: no-cache
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Expires: Thu, 04 Oct 2012 17:15:05 GMT
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - sending header : Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - Done with the headers
-2012-10-04 19:15:05 [15417]:[4]verbs - CrossProxy::send_reply - BODY: {"page":"1","total":14,"records":696,"rows":[{"id":"307484","cell":["307484","49","1488","depolder","2012-10-05","basf","04:46",""]},{"id":"307481","cell":["307481","13","1510","depolder","2012-10-05","basf","06:51","17:05"]},{"id":"307480","cell":["307480","12","1498","depolder","2012-10-05","basf","06:55","17:05"]},{"id":"307479","cell":["307479","11","1527","depolder","2012-10-05","basf","06:40","17:05"]},{"id":"307411","cell":["307411","58","1469","depolder","2012-10-05","basf","04:43",""]},{"id":"307410","cell":["307410","58","1469","depolder","2012-10-05","basf","12:36",""]},{"id":"307408","cell":["307408","56","1482","depolder","2012-10-05","basf","04:38",""]},{"id":"307407","cell":["307407","56","1476","depolder","2012-10-05","basf","12:33",""]},{"id":"307405","cell":["307405","55","1471","depolder","2012-10-05","basf","04:39",""]},{"id":"307404","cell":["307404","55","1471","depolder","2012-10-05","basf","12:35",""]},{"id":"307402","cell":["307402","54","1464","depolder","2012-10-05","basf","04:35",""]},{"id":"307401","cell":["307401","54","1464","depolder","2012-10-05","basf","12:31",""]},{"id":"307399","cell":["307399","52","1489","depolder","2012-10-05","basf","05:00",""]},{"id":"307398","cell":["307398","52","1488","depolder","2012-10-05","basf","12:55",""]},{"id":"307393","cell":["307393","50","1467","depolder","2012-10-05","basf","04:59",""]},{"id":"307392","cell":["307392","50","1467","depolder","2012-10-05","basf","12:54",""]},{"id":"307389","cell":["307389","24","1489","depolder","2012-10-05","basf","07:06","17:05"]},{"id":"307388","cell":["307388","23","1467","depolder","2012-10-05","basf","07:05","17:05"]},{"id":"307387","cell":["307387","22","1501","depolder","2012-10-05","basf","07:03","17:05"]},{"id":"307386","cell":["307386","21","1513","depolder","2012-10-05","basf","07:01","17:05"]},{"id":"307385","cell":["307385","20","1488","depolder","2012-10-05","basf","07:00","17:05"]},{"id":"307383","cell":["307383","16","1483","depolder","2012-10-05","basf","06:42","17:05"]},{"id":"307382","cell":["307382","15","1528","depolder","2012-10-05","basf","06:53","17:05"]},{"id":"307381","cell":["307381","8","1497","depolder","2012-10-05","basf","06:47","17:05"]},{"id":"307380","cell":["307380","7","1470","depolder","2012-10-05","basf","06:56","17:05"]},{"id":"307379","cell":["307379","6","1507","depolder","2012-10-05","basf","06:46","17:05"]},{"id":"307378","cell":["307378","3","1511","depolder","2012-10-05","basf","06:58","17:05"]},{"id":"307377","cell":["307377","2","1523","depolder","2012-10-05","basf","06:54","17:05"]},{"id":"307136","cell":["307136","49","1488","depolder","2012-10-04","basf","04:46",""]},{"id":"307133","cell":["307133","13","1510","depolder","2012-10-04","basf","06:51","17:05"]},{"id":"307132","cell":["307132","12","1498","depolder","2012-10-04","basf","06:55","17:05"]},{"id":"307131","cell":["307131","11","1527","depolder","2012-10-04","basf","06:40","17:05"]},{"id":"307064","cell":["307064","58","1469","depolder","2012-10-04","basf","04:43",""]},{"id":"307061","cell":["307061","56","1482","depolder","2012-10-04","basf","04:38",""]},{"id":"307060","cell":["307060","56","1476","depolder","2012-10-04","basf","12:33",""]},{"id":"307058","cell":["307058","55","1471","depolder","2012-10-04","basf","04:39",""]},{"id":"307057","cell":["307057","55","1471","depolder","2012-10-04","basf","12:35",""]},{"id":"307055","cell":["307055","54","1464","depolder","2012-10-04","basf","04:35",""]},{"id":"307054","cell":["307054","54","1464","depolder","2012-10-04","basf","12:31",""]},{"id":"307052","cell":["307052","52","1489","depolder","2012-10-04","basf","05:00",""]},{"id":"307051","cell":["307051","52","1488","depolder","2012-10-04","basf","12:55",""]},{"id":"307049","cell":["307049","51","1502","depolder","2012-10-04","basf","05:00",""]},{"id":"307046","cell":["307046","50","1467","depolder","2012-10-04","basf","04:59",""]},{"id":"307045","cell":["307045","50","1467","depolder","2012-10-04","basf","12:54",""]},{"id":"307043","cell":["307043","25","1526","depolder","2012-10-04","basf","07:08","17:05"]},{"id":"307042","cell":["307042","24","1489","depolder","2012-10-04","basf","07:06","17:05"]},{"id":"307041","cell":["307041","23","1467","depolder","2012-10-04","basf","07:05","17:05"]},{"id":"307040","cell":["307040","22","1501","depolder","2012-10-04","basf","07:03","17:05"]},{"id":"307039","cell":["307039","21","1513","depolder","2012-10-04","basf","07:01","17:05"]},{"id":"307038","cell":["307038","20","1488","depolder","2012-10-04","basf","07:00","17:05"]}]}
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::__construct - $_SERVER information
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_HOST => www2.synctrace.com
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_ACCEPT => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en-us,en;q=0.5
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_DNT => 1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_CONNECTION => keep-alive
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_X_REQUESTED_WITH => XMLHttpRequest
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_REFERER => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:19 [14974]:[4]verbs - 		HTTP_COOKIE => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:19 [14974]:[4]verbs - 		PATH => /usr/local/bin:/usr/bin:/bin
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_SIGNATURE => <address>Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch Server at www2.synctrace.com Port 80</address>
-
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_SOFTWARE => Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_NAME => www2.synctrace.com
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_ADDR => 46.244.126.37
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_PORT => 80
-2012-10-04 19:16:19 [14974]:[4]verbs - 		REMOTE_ADDR => 94.226.36.213
-2012-10-04 19:16:19 [14974]:[4]verbs - 		DOCUMENT_ROOT => /var/www/prod_v23/
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_ADMIN => info@synctrace.com
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SCRIPT_FILENAME => /var/www/prod_v23/CrossProxy/crossproxy.php
-2012-10-04 19:16:19 [14974]:[4]verbs - 		REMOTE_PORT => 41448
-2012-10-04 19:16:19 [14974]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		REQUEST_METHOD => GET
-2012-10-04 19:16:19 [14974]:[4]verbs - 		QUERY_STRING => account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370980332&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:16:19 [14974]:[4]verbs - 		REQUEST_URI => /CrossProxy/crossproxy.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370980332&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:16:19 [14974]:[4]verbs - 		SCRIPT_NAME => /CrossProxy/crossproxy.php
-2012-10-04 19:16:19 [14974]:[4]verbs - 		PHP_SELF => /CrossProxy/crossproxy.php
-2012-10-04 19:16:19 [14974]:[4]verbs - 		REQUEST_TIME => 1349370979
-2012-10-04 19:16:19 [14974]:[4]verbs - 		argv => Array
-2012-10-04 19:16:19 [14974]:[4]verbs - 		argc => 1
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::__construct - $_REQUEST information
-2012-10-04 19:16:19 [14974]:[4]verbs - 		account => depolder
-2012-10-04 19:16:19 [14974]:[4]verbs - 		cmd => planning
-2012-10-04 19:16:19 [14974]:[4]verbs - 		full => 1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		grid => true
-2012-10-04 19:16:19 [14974]:[4]verbs - 		_search => false
-2012-10-04 19:16:19 [14974]:[4]verbs - 		nd => 1349370980332
-2012-10-04 19:16:19 [14974]:[4]verbs - 		rows => 50
-2012-10-04 19:16:19 [14974]:[4]verbs - 		page => 1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		sidx => id
-2012-10-04 19:16:19 [14974]:[4]verbs - 		sord => desc
-2012-10-04 19:16:19 [14974]:[4]verbs - 		__utma => 191337256.1404275174.1322668580.1333375117.1334069697.40
-2012-10-04 19:16:19 [14974]:[4]verbs - 		__utmz => 191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
-2012-10-04 19:16:19 [14974]:[4]verbs - 		sessionkey => 8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::__construct - COOKIE information : __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::__construct - Request header information
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Host => www2.synctrace.com
-2012-10-04 19:16:19 [14974]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept-Encoding => gzip, deflate
-2012-10-04 19:16:19 [14974]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Connection => keep-alive
-2012-10-04 19:16:19 [14974]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Cookie => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::execute - Validating user permissions...
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::execute - Prepare the backend request..
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::create_request - result: http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370980332&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::create_request - filtering header : Host
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::create_request - filtering header : Connection
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::create_request - filtering header : Cookie
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
-2012-10-04 19:16:19 [14974]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:19 [14974]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::execute - Perform request.
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::do_request - set curl GET options
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
-2012-10-04 19:16:19 [14974]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:19 [14974]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:19 [14974]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:19 [14974]:[5]dtail - 		Accept-Encoding => gzip
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::do_request - Calling backend now!
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
-2012-10-04 19:16:19 [14974]:[4]verbs - 		url => http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370980332&rows=50&page=1&sidx=id&sord=desc
-2012-10-04 19:16:19 [14974]:[4]verbs - 		content_type => application/json
-2012-10-04 19:16:19 [14974]:[4]verbs - 		http_code => 200
-2012-10-04 19:16:19 [14974]:[4]verbs - 		header_size => 447
-2012-10-04 19:16:19 [14974]:[4]verbs - 		request_size => 645
-2012-10-04 19:16:19 [14974]:[4]verbs - 		filetime => -1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		ssl_verify_result => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		redirect_count => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		total_time => 0.08941
-2012-10-04 19:16:19 [14974]:[4]verbs - 		namelookup_time => 0.017536
-2012-10-04 19:16:19 [14974]:[4]verbs - 		connect_time => 0.02735
-2012-10-04 19:16:19 [14974]:[4]verbs - 		pretransfer_time => 0.027375
-2012-10-04 19:16:19 [14974]:[4]verbs - 		size_upload => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		size_download => 740
-2012-10-04 19:16:19 [14974]:[4]verbs - 		speed_download => 8276
-2012-10-04 19:16:19 [14974]:[4]verbs - 		speed_upload => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		download_content_length => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		upload_content_length => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		starttransfer_time => 0.089285
-2012-10-04 19:16:19 [14974]:[4]verbs - 		redirect_time => 0
-2012-10-04 19:16:19 [14974]:[4]verbs - 		request_header => GET /dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370980332&rows=50&page=1&sidx=id&sord=desc HTTP/1.1
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-Host: live.synctrace.com
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::execute - 4. Proxy Reply to client
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - Backend headers
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Server => nginx
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Date => Sat, 19 Sep 2015 20:37:39 GMT
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Content-Type => text/html
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Transfer-Encoding => chunked
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Connection => keep-alive
+2015-09-19 22:37:38 [26019]:[4]verbs - 		X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Last-Modified => Sat, 19 Sep 2015 20:37:39 GMT
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Pragma => no-cache
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Expires => Sat, 19 Sep 2015 20:37:39 GMT
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Cache-Control => Array
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Content-Encoding => gzip
+2015-09-19 22:37:38 [26019]:[4]verbs - 		Vary => Accept-Encoding
+2015-09-19 22:37:38 [26019]:[4]verbs - 		X-Whom => live-cartman
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - 	length: 51
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - Sending more headers
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Date: Sat, 19 Sep 2015 20:37:39 GMT
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: text/html
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Last-Modified: Sat, 19 Sep 2015 20:37:39 GMT
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - sending header : X-Whom: live-cartman
+2015-09-19 22:37:38 [26019]:[5]dtail - CrossProxy::send_reply - Inserting/Replacing cache related headers
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - Done with the headers
+2015-09-19 22:37:38 [26019]:[4]verbs - CrossProxy::send_reply - BODY: {"error":501,"error_message":"Not a valid account"}
+2015-09-19 22:37:38 [26019]:[3]notic - CrossProxy::execute - 5. Done
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
+2015-09-19 22:40:56 [26020]:[4]verbs - CrossProxy::__construct - $_SERVER information
+2015-09-19 22:40:56 [26020]:[4]verbs - 		USER => www-data
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HOME => /var/www
+2015-09-19 22:40:56 [26020]:[4]verbs - 		FCGI_ROLE => RESPONDER
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SCRIPT_FILENAME => /home/glenn/repos/CrossProxy/crossproxy.php
+2015-09-19 22:40:56 [26020]:[4]verbs - 		QUERY_STRING => CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REQUEST_METHOD => GET
+2015-09-19 22:40:56 [26020]:[4]verbs - 		CONTENT_TYPE => 
+2015-09-19 22:40:56 [26020]:[4]verbs - 		CONTENT_LENGTH => 
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SCRIPT_NAME => /crossproxy.php
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REQUEST_URI => /crossproxy.php?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:40:56 [26020]:[4]verbs - 		DOCUMENT_URI => /crossproxy.php
+2015-09-19 22:40:56 [26020]:[4]verbs - 		DOCUMENT_ROOT => /home/glenn/repos/CrossProxy
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
+2015-09-19 22:40:56 [26020]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SERVER_SOFTWARE => nginx/1.4.6
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REMOTE_ADDR => 127.0.0.1
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REMOTE_PORT => 44570
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SERVER_ADDR => 127.0.0.1
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SERVER_PORT => 80
+2015-09-19 22:40:56 [26020]:[4]verbs - 		SERVER_NAME => localhost
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REDIRECT_STATUS => 200
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_HOST => localhost
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_CONNECTION => keep-alive
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_ACCEPT => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate, sdch
+2015-09-19 22:40:56 [26020]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:40:56 [26020]:[4]verbs - 		PHP_SELF => /crossproxy.php
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REQUEST_TIME_FLOAT => 1442695256.8683
+2015-09-19 22:40:56 [26020]:[4]verbs - 		REQUEST_TIME => 1442695256
+2015-09-19 22:40:56 [26020]:[4]verbs - CrossProxy::__construct - $_REQUEST information
+2015-09-19 22:40:56 [26020]:[4]verbs - 		CrmId => disney
+2015-09-19 22:40:56 [26020]:[4]verbs - 		AccountId => disney
+2015-09-19 22:40:56 [26020]:[4]verbs - 		ContentId => McFarland_910_002
+2015-09-19 22:40:56 [26020]:[4]verbs - 		KeyId => 1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::__construct - COOKIE information : 
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::__construct - Request header information
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Host => localhost
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Connection => keep-alive
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:40:56 [26020]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept-Encoding => gzip, deflate, sdch
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::execute - 1. Validating user permissions...
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::execute - 2. Prepare the backend request..
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::create_request - result: http://disney.stage.ott.irdeto.com/streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::create_request - filtering header : Host
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::create_request - filtering header : Connection
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:40:56 [26020]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:40:56 [26020]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::execute - 3. Perform request.
+2015-09-19 22:40:56 [26020]:[3]notic - CrossProxy::do_request - set curl GET options
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::do_request - Setting curl cookie
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:40:56 [26020]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:40:56 [26020]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:40:56 [26020]:[5]dtail - 		Accept-Encoding => gzip
+2015-09-19 22:40:56 [26020]:[5]dtail - CrossProxy::do_request - Calling backend now!
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
+2015-09-19 22:40:58 [26020]:[4]verbs - 		url => http://disney.stage.ott.irdeto.com/streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:40:58 [26020]:[4]verbs - 		content_type => application/json; charset=utf-8
+2015-09-19 22:40:58 [26020]:[4]verbs - 		http_code => 405
+2015-09-19 22:40:58 [26020]:[4]verbs - 		header_size => 255
+2015-09-19 22:40:58 [26020]:[4]verbs - 		request_size => 334
+2015-09-19 22:40:58 [26020]:[4]verbs - 		filetime => -1
+2015-09-19 22:40:58 [26020]:[4]verbs - 		ssl_verify_result => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		redirect_count => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		total_time => 1.739406
+2015-09-19 22:40:58 [26020]:[4]verbs - 		namelookup_time => 0.06044
+2015-09-19 22:40:58 [26020]:[4]verbs - 		connect_time => 0.235134
+2015-09-19 22:40:58 [26020]:[4]verbs - 		pretransfer_time => 0.235204
+2015-09-19 22:40:58 [26020]:[4]verbs - 		size_upload => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		size_download => 72
+2015-09-19 22:40:58 [26020]:[4]verbs - 		speed_download => 41
+2015-09-19 22:40:58 [26020]:[4]verbs - 		speed_upload => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		download_content_length => 72
+2015-09-19 22:40:58 [26020]:[4]verbs - 		upload_content_length => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		starttransfer_time => 1.739342
+2015-09-19 22:40:58 [26020]:[4]verbs - 		redirect_time => 0
+2015-09-19 22:40:58 [26020]:[4]verbs - 		redirect_url => 
+2015-09-19 22:40:58 [26020]:[4]verbs - 		primary_ip => 54.200.120.28
+2015-09-19 22:40:58 [26020]:[4]verbs - 		certinfo => Array
+2015-09-19 22:40:58 [26020]:[4]verbs - 		primary_port => 80
+2015-09-19 22:40:58 [26020]:[4]verbs - 		local_ip => 192.168.1.111
+2015-09-19 22:40:58 [26020]:[4]verbs - 		local_port => 40266
+2015-09-19 22:40:58 [26020]:[4]verbs - 		request_header => GET /streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Host: disney.stage.ott.irdeto.com
 Accept: */*
 Accept-Encoding: deflate, gzip
-Cookie: __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-http://www2.synctrace.com/index.php?show=395&s=85023
 
 
-2012-10-04 19:16:19 [14974]:[3]notic - CrossProxy::execute - Proxy Reply to client
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - Backend headers
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Server => nginx
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Date => Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Content-Type => application/json
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Transfer-Encoding => chunked
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Connection => keep-alive
-2012-10-04 19:16:19 [14974]:[4]verbs - 		X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Last-Modified => Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Pragma => no-cache
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Expires => Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Cache-Control => Array
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Content-Encoding => gzip
-2012-10-04 19:16:19 [14974]:[4]verbs - 		Vary => Accept-Encoding
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - 	length: 4561
-2012-10-04 19:16:19 [14974]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - Sending more headers
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Date: Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Last-Modified: Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Pragma: no-cache
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Expires: Thu, 04 Oct 2012 17:16:19 GMT
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - sending header : Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - Done with the headers
-2012-10-04 19:16:19 [14974]:[4]verbs - CrossProxy::send_reply - BODY: {"page":"1","total":14,"records":696,"rows":[{"id":"307484","cell":["307484","49","1488","depolder","2012-10-05","basf","04:46",""]},{"id":"307481","cell":["307481","13","1510","depolder","2012-10-05","basf","06:51","17:05"]},{"id":"307480","cell":["307480","12","1498","depolder","2012-10-05","basf","06:55","17:05"]},{"id":"307479","cell":["307479","11","1527","depolder","2012-10-05","basf","06:40","17:05"]},{"id":"307411","cell":["307411","58","1469","depolder","2012-10-05","basf","04:43",""]},{"id":"307410","cell":["307410","58","1469","depolder","2012-10-05","basf","12:36",""]},{"id":"307408","cell":["307408","56","1482","depolder","2012-10-05","basf","04:38",""]},{"id":"307407","cell":["307407","56","1476","depolder","2012-10-05","basf","12:33",""]},{"id":"307405","cell":["307405","55","1471","depolder","2012-10-05","basf","04:39",""]},{"id":"307404","cell":["307404","55","1471","depolder","2012-10-05","basf","12:35",""]},{"id":"307402","cell":["307402","54","1464","depolder","2012-10-05","basf","04:35",""]},{"id":"307401","cell":["307401","54","1464","depolder","2012-10-05","basf","12:31",""]},{"id":"307399","cell":["307399","52","1489","depolder","2012-10-05","basf","05:00",""]},{"id":"307398","cell":["307398","52","1488","depolder","2012-10-05","basf","12:55",""]},{"id":"307393","cell":["307393","50","1467","depolder","2012-10-05","basf","04:59",""]},{"id":"307392","cell":["307392","50","1467","depolder","2012-10-05","basf","12:54",""]},{"id":"307389","cell":["307389","24","1489","depolder","2012-10-05","basf","07:06","17:05"]},{"id":"307388","cell":["307388","23","1467","depolder","2012-10-05","basf","07:05","17:05"]},{"id":"307387","cell":["307387","22","1501","depolder","2012-10-05","basf","07:03","17:05"]},{"id":"307386","cell":["307386","21","1513","depolder","2012-10-05","basf","07:01","17:05"]},{"id":"307385","cell":["307385","20","1488","depolder","2012-10-05","basf","07:00","17:05"]},{"id":"307383","cell":["307383","16","1483","depolder","2012-10-05","basf","06:42","17:05"]},{"id":"307382","cell":["307382","15","1528","depolder","2012-10-05","basf","06:53","17:05"]},{"id":"307381","cell":["307381","8","1497","depolder","2012-10-05","basf","06:47","17:05"]},{"id":"307380","cell":["307380","7","1470","depolder","2012-10-05","basf","06:56","17:05"]},{"id":"307379","cell":["307379","6","1507","depolder","2012-10-05","basf","06:46","17:05"]},{"id":"307378","cell":["307378","3","1511","depolder","2012-10-05","basf","06:58","17:05"]},{"id":"307377","cell":["307377","2","1523","depolder","2012-10-05","basf","06:54","17:05"]},{"id":"307136","cell":["307136","49","1488","depolder","2012-10-04","basf","04:46",""]},{"id":"307133","cell":["307133","13","1510","depolder","2012-10-04","basf","06:51","17:05"]},{"id":"307132","cell":["307132","12","1498","depolder","2012-10-04","basf","06:55","17:05"]},{"id":"307131","cell":["307131","11","1527","depolder","2012-10-04","basf","06:40","17:05"]},{"id":"307064","cell":["307064","58","1469","depolder","2012-10-04","basf","04:43",""]},{"id":"307061","cell":["307061","56","1482","depolder","2012-10-04","basf","04:38",""]},{"id":"307060","cell":["307060","56","1476","depolder","2012-10-04","basf","12:33",""]},{"id":"307058","cell":["307058","55","1471","depolder","2012-10-04","basf","04:39",""]},{"id":"307057","cell":["307057","55","1471","depolder","2012-10-04","basf","12:35",""]},{"id":"307055","cell":["307055","54","1464","depolder","2012-10-04","basf","04:35",""]},{"id":"307054","cell":["307054","54","1464","depolder","2012-10-04","basf","12:31",""]},{"id":"307052","cell":["307052","52","1489","depolder","2012-10-04","basf","05:00",""]},{"id":"307051","cell":["307051","52","1488","depolder","2012-10-04","basf","12:55",""]},{"id":"307049","cell":["307049","51","1502","depolder","2012-10-04","basf","05:00",""]},{"id":"307046","cell":["307046","50","1467","depolder","2012-10-04","basf","04:59",""]},{"id":"307045","cell":["307045","50","1467","depolder","2012-10-04","basf","12:54",""]},{"id":"307043","cell":["307043","25","1526","depolder","2012-10-04","basf","07:08","17:05"]},{"id":"307042","cell":["307042","24","1489","depolder","2012-10-04","basf","07:06","17:05"]},{"id":"307041","cell":["307041","23","1467","depolder","2012-10-04","basf","07:05","17:05"]},{"id":"307040","cell":["307040","22","1501","depolder","2012-10-04","basf","07:03","17:05"]},{"id":"307039","cell":["307039","21","1513","depolder","2012-10-04","basf","07:01","17:05"]},{"id":"307038","cell":["307038","20","1488","depolder","2012-10-04","basf","07:00","17:05"]}]}
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::__construct - $_SERVER information
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_HOST => www2.synctrace.com
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_ACCEPT => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en-us,en;q=0.5
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_DNT => 1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_CONNECTION => keep-alive
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_X_REQUESTED_WITH => XMLHttpRequest
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_REFERER => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:27 [15449]:[4]verbs - 		HTTP_COOKIE => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:27 [15449]:[4]verbs - 		PATH => /usr/local/bin:/usr/bin:/bin
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_SIGNATURE => <address>Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch Server at www2.synctrace.com Port 80</address>
-
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_SOFTWARE => Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_NAME => www2.synctrace.com
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_ADDR => 46.244.126.37
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_PORT => 80
-2012-10-04 19:16:27 [15449]:[4]verbs - 		REMOTE_ADDR => 94.226.36.213
-2012-10-04 19:16:27 [15449]:[4]verbs - 		DOCUMENT_ROOT => /var/www/prod_v23/
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_ADMIN => info@synctrace.com
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SCRIPT_FILENAME => /var/www/prod_v23/CrossProxy/crossproxy.php
-2012-10-04 19:16:27 [15449]:[4]verbs - 		REMOTE_PORT => 41452
-2012-10-04 19:16:27 [15449]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		REQUEST_METHOD => GET
-2012-10-04 19:16:27 [15449]:[4]verbs - 		QUERY_STRING => account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370989062&rows=50&page=1&sidx=account&sord=asc&_=1349370989064
-2012-10-04 19:16:27 [15449]:[4]verbs - 		REQUEST_URI => /CrossProxy/crossproxy.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370989062&rows=50&page=1&sidx=account&sord=asc&_=1349370989064
-2012-10-04 19:16:27 [15449]:[4]verbs - 		SCRIPT_NAME => /CrossProxy/crossproxy.php
-2012-10-04 19:16:27 [15449]:[4]verbs - 		PHP_SELF => /CrossProxy/crossproxy.php
-2012-10-04 19:16:27 [15449]:[4]verbs - 		REQUEST_TIME => 1349370987
-2012-10-04 19:16:27 [15449]:[4]verbs - 		argv => Array
-2012-10-04 19:16:27 [15449]:[4]verbs - 		argc => 1
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::__construct - $_REQUEST information
-2012-10-04 19:16:27 [15449]:[4]verbs - 		account => depolder
-2012-10-04 19:16:27 [15449]:[4]verbs - 		cmd => planning
-2012-10-04 19:16:27 [15449]:[4]verbs - 		full => 1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		grid => true
-2012-10-04 19:16:27 [15449]:[4]verbs - 		_search => false
-2012-10-04 19:16:27 [15449]:[4]verbs - 		nd => 1349370989062
-2012-10-04 19:16:27 [15449]:[4]verbs - 		rows => 50
-2012-10-04 19:16:27 [15449]:[4]verbs - 		page => 1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		sidx => account
-2012-10-04 19:16:27 [15449]:[4]verbs - 		sord => asc
-2012-10-04 19:16:27 [15449]:[4]verbs - 		_ => 1349370989064
-2012-10-04 19:16:27 [15449]:[4]verbs - 		__utma => 191337256.1404275174.1322668580.1333375117.1334069697.40
-2012-10-04 19:16:27 [15449]:[4]verbs - 		__utmz => 191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
-2012-10-04 19:16:27 [15449]:[4]verbs - 		sessionkey => 8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::__construct - COOKIE information : __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::__construct - Request header information
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Host => www2.synctrace.com
-2012-10-04 19:16:27 [15449]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept-Encoding => gzip, deflate
-2012-10-04 19:16:27 [15449]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Connection => keep-alive
-2012-10-04 19:16:27 [15449]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Cookie => __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::execute - Validating user permissions...
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::execute - Prepare the backend request..
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::create_request - result: http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370989062&rows=50&page=1&sidx=account&sord=asc&_=1349370989064
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::create_request - filtering header : Host
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::create_request - filtering header : Connection
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::create_request - filtering header : Cookie
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
-2012-10-04 19:16:27 [15449]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:27 [15449]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::execute - Perform request.
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::do_request - set curl GET options
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
-2012-10-04 19:16:27 [15449]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept => application/json, text/javascript, */*; q=0.01
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept-Language => en-us,en;q=0.5
-2012-10-04 19:16:27 [15449]:[5]dtail - 		DNT => 1
-2012-10-04 19:16:27 [15449]:[5]dtail - 		X-Requested-With => XMLHttpRequest
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Referer => http://www2.synctrace.com/index.php?show=395&s=85023
-2012-10-04 19:16:27 [15449]:[5]dtail - 		Accept-Encoding => gzip
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::do_request - Calling backend now!
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
-2012-10-04 19:16:27 [15449]:[4]verbs - 		url => http://live.synctrace.com/dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370989062&rows=50&page=1&sidx=account&sord=asc&_=1349370989064
-2012-10-04 19:16:27 [15449]:[4]verbs - 		content_type => application/json
-2012-10-04 19:16:27 [15449]:[4]verbs - 		http_code => 200
-2012-10-04 19:16:27 [15449]:[4]verbs - 		header_size => 447
-2012-10-04 19:16:27 [15449]:[4]verbs - 		request_size => 665
-2012-10-04 19:16:27 [15449]:[4]verbs - 		filetime => -1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		ssl_verify_result => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		redirect_count => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		total_time => 0.080895
-2012-10-04 19:16:27 [15449]:[4]verbs - 		namelookup_time => 0.002312
-2012-10-04 19:16:27 [15449]:[4]verbs - 		connect_time => 0.01205
-2012-10-04 19:16:27 [15449]:[4]verbs - 		pretransfer_time => 0.012076
-2012-10-04 19:16:27 [15449]:[4]verbs - 		size_upload => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		size_download => 732
-2012-10-04 19:16:27 [15449]:[4]verbs - 		speed_download => 9048
-2012-10-04 19:16:27 [15449]:[4]verbs - 		speed_upload => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		download_content_length => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		upload_content_length => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		starttransfer_time => 0.080747
-2012-10-04 19:16:27 [15449]:[4]verbs - 		redirect_time => 0
-2012-10-04 19:16:27 [15449]:[4]verbs - 		request_header => GET /dev/class.planning.php?account=depolder&cmd=planning&full=1&grid=true&_search=false&nd=1349370989062&rows=50&page=1&sidx=account&sord=asc&_=1349370989064 HTTP/1.1
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-Host: live.synctrace.com
+2015-09-19 22:40:58 [26020]:[3]notic - CrossProxy::execute - 4. Proxy Reply to client
+2015-09-19 22:40:58 [26020]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
+2015-09-19 22:40:58 [26020]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - Backend headers
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Allow => POST
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Content-Type => application/json; charset=utf-8
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Date => Sat, 19 Sep 2015 20:40:59 GMT
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Server => Microsoft-IIS/8.5
+2015-09-19 22:40:58 [26020]:[4]verbs - 		X-Hostname => ore-sdis-drm-01
+2015-09-19 22:40:58 [26020]:[4]verbs - 		X-Powered-By => ASP.NET
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Content-Length => 72
+2015-09-19 22:40:58 [26020]:[4]verbs - 		Connection => keep-alive
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - 	length: 72
+2015-09-19 22:40:58 [26020]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - Sending more headers
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - sending header : Allow: POST
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json; charset=utf-8
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - sending header : Date: Sat, 19 Sep 2015 20:40:59 GMT
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - sending header : X-Hostname: ore-sdis-drm-01
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: ASP.NET
+2015-09-19 22:40:58 [26020]:[5]dtail - CrossProxy::send_reply - Inserting/Replacing cache related headers
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - Done with the headers
+2015-09-19 22:40:58 [26020]:[4]verbs - CrossProxy::send_reply - BODY: {"Message":"The requested resource does not support http method 'GET'."}
+2015-09-19 22:40:58 [26020]:[3]notic - CrossProxy::execute - 5. Done
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::__construct - Opening log file : proxy.log
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::__construct - Start, Parsing target host info
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::__construct - $_SERVER information
+2015-09-19 22:41:27 [26019]:[4]verbs - 		USER => www-data
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HOME => /var/www
+2015-09-19 22:41:27 [26019]:[4]verbs - 		FCGI_ROLE => RESPONDER
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SCRIPT_FILENAME => /home/glenn/repos/CrossProxy/crossproxy.php
+2015-09-19 22:41:27 [26019]:[4]verbs - 		QUERY_STRING => CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REQUEST_METHOD => GET
+2015-09-19 22:41:27 [26019]:[4]verbs - 		CONTENT_TYPE => 
+2015-09-19 22:41:27 [26019]:[4]verbs - 		CONTENT_LENGTH => 
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SCRIPT_NAME => /crossproxy.php
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REQUEST_URI => /crossproxy.php?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:41:27 [26019]:[4]verbs - 		DOCUMENT_URI => /crossproxy.php
+2015-09-19 22:41:27 [26019]:[4]verbs - 		DOCUMENT_ROOT => /home/glenn/repos/CrossProxy
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SERVER_PROTOCOL => HTTP/1.1
+2015-09-19 22:41:27 [26019]:[4]verbs - 		GATEWAY_INTERFACE => CGI/1.1
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SERVER_SOFTWARE => nginx/1.4.6
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REMOTE_ADDR => 127.0.0.1
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REMOTE_PORT => 44570
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SERVER_ADDR => 127.0.0.1
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SERVER_PORT => 80
+2015-09-19 22:41:27 [26019]:[4]verbs - 		SERVER_NAME => localhost
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REDIRECT_STATUS => 200
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_HOST => localhost
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_CONNECTION => keep-alive
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_CACHE_CONTROL => max-age=0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_ACCEPT => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_USER_AGENT => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_ACCEPT_ENCODING => gzip, deflate, sdch
+2015-09-19 22:41:27 [26019]:[4]verbs - 		HTTP_ACCEPT_LANGUAGE => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:41:27 [26019]:[4]verbs - 		PHP_SELF => /crossproxy.php
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REQUEST_TIME_FLOAT => 1442695287.3167
+2015-09-19 22:41:27 [26019]:[4]verbs - 		REQUEST_TIME => 1442695287
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::__construct - $_REQUEST information
+2015-09-19 22:41:27 [26019]:[4]verbs - 		CrmId => disney
+2015-09-19 22:41:27 [26019]:[4]verbs - 		AccountId => disney
+2015-09-19 22:41:27 [26019]:[4]verbs - 		ContentId => McFarland_910_002
+2015-09-19 22:41:27 [26019]:[4]verbs - 		KeyId => 1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::__construct - COOKIE information : 
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::__construct - Request header information
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Host => localhost
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Connection => keep-alive
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Cache-Control => max-age=0
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:41:27 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept-Encoding => gzip, deflate, sdch
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::__construct - Incomming request method : GET
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::execute - 1. Validating user permissions...
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::execute - 2. Prepare the backend request..
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::create_request - result: http://disney.stage.ott.irdeto.com/streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::create_request - filtering header : Host
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::create_request - filtering header : Connection
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::create_request - filtering header : Cache-Control
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::create_request - filtering header : Accept-Encoding
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::create_request - Backend request headers: : 
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:41:27 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:41:27 [26019]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::execute - 3. Perform request.
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::do_request - set curl GET options
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::do_request - Setting curl cookie
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::do_request - Using following headers for curl backend call: 
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+2015-09-19 22:41:27 [26019]:[5]dtail - 		User-Agent => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept-Language => en,en-US;q=0.8,nl;q=0.6,af;q=0.4,fr;q=0.2
+2015-09-19 22:41:27 [26019]:[5]dtail - 		X-Forwarded-For => 127.0.0.1
+2015-09-19 22:41:27 [26019]:[5]dtail - 		Accept-Encoding => gzip
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::do_request - Calling backend now!
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::do_request - CURL curl_getinfo output: 
+2015-09-19 22:41:27 [26019]:[4]verbs - 		url => http://disney.stage.ott.irdeto.com/streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df
+2015-09-19 22:41:27 [26019]:[4]verbs - 		content_type => application/json; charset=utf-8
+2015-09-19 22:41:27 [26019]:[4]verbs - 		http_code => 405
+2015-09-19 22:41:27 [26019]:[4]verbs - 		header_size => 255
+2015-09-19 22:41:27 [26019]:[4]verbs - 		request_size => 334
+2015-09-19 22:41:27 [26019]:[4]verbs - 		filetime => -1
+2015-09-19 22:41:27 [26019]:[4]verbs - 		ssl_verify_result => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		redirect_count => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		total_time => 0.373101
+2015-09-19 22:41:27 [26019]:[4]verbs - 		namelookup_time => 0.004145
+2015-09-19 22:41:27 [26019]:[4]verbs - 		connect_time => 0.18342
+2015-09-19 22:41:27 [26019]:[4]verbs - 		pretransfer_time => 0.183515
+2015-09-19 22:41:27 [26019]:[4]verbs - 		size_upload => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		size_download => 72
+2015-09-19 22:41:27 [26019]:[4]verbs - 		speed_download => 192
+2015-09-19 22:41:27 [26019]:[4]verbs - 		speed_upload => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		download_content_length => 72
+2015-09-19 22:41:27 [26019]:[4]verbs - 		upload_content_length => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		starttransfer_time => 0.37305
+2015-09-19 22:41:27 [26019]:[4]verbs - 		redirect_time => 0
+2015-09-19 22:41:27 [26019]:[4]verbs - 		redirect_url => 
+2015-09-19 22:41:27 [26019]:[4]verbs - 		primary_ip => 54.148.72.4
+2015-09-19 22:41:27 [26019]:[4]verbs - 		certinfo => Array
+2015-09-19 22:41:27 [26019]:[4]verbs - 		primary_port => 80
+2015-09-19 22:41:27 [26019]:[4]verbs - 		local_ip => 192.168.1.111
+2015-09-19 22:41:27 [26019]:[4]verbs - 		local_port => 35637
+2015-09-19 22:41:27 [26019]:[4]verbs - 		request_header => GET /streaming/getckc?CrmId=disney&AccountId=disney&ContentId=McFarland_910_002&KeyId=1f2db6ae-6e14-4572-891c-d1eecd8061df HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+Host: disney.stage.ott.irdeto.com
 Accept: */*
 Accept-Encoding: deflate, gzip
-Cookie: __utma=191337256.1404275174.1322668580.1333375117.1334069697.40; __utmz=191337256.1322668580.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); sessionkey=8da17246a99ca5d43cb84b91bda3ad6b
-Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1
-http://www2.synctrace.com/index.php?show=395&s=85023
 
 
-2012-10-04 19:16:27 [15449]:[3]notic - CrossProxy::execute - Proxy Reply to client
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - Backend headers
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Server => nginx
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Date => Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Content-Type => application/json
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Transfer-Encoding => chunked
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Connection => keep-alive
-2012-10-04 19:16:27 [15449]:[4]verbs - 		X-Powered-By => PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Last-Modified => Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Pragma => no-cache
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Expires => Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Cache-Control => Array
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Content-Encoding => gzip
-2012-10-04 19:16:27 [15449]:[4]verbs - 		Vary => Accept-Encoding
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - 	length: 4551
-2012-10-04 19:16:27 [15449]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - Sending more headers
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Date: Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: PHP/5.3.2-1ubuntu4.7ppa5~lucid1
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Last-Modified: Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Pragma: no-cache
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Expires: Thu, 04 Oct 2012 17:16:27 GMT
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - sending header : Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - Done with the headers
-2012-10-04 19:16:27 [15449]:[4]verbs - CrossProxy::send_reply - BODY: {"page":"1","total":14,"records":696,"rows":[{"id":"293383","cell":["293383","2","1514","depolder","2012-09-17","basf","06:54","17:05"]},{"id":"293384","cell":["293384","3","1532","depolder","2012-09-17","basf","06:58","17:05"]},{"id":"293385","cell":["293385","6","1507","depolder","2012-09-17","basf","06:46","17:05"]},{"id":"293386","cell":["293386","7","1470","depolder","2012-09-17","basf","06:56","17:05"]},{"id":"293387","cell":["293387","8","1497","depolder","2012-09-17","basf","06:47","17:05"]},{"id":"293388","cell":["293388","11","1527","depolder","2012-09-17","basf","06:40","17:05"]},{"id":"293389","cell":["293389","12","1491","depolder","2012-09-17","basf","06:55","17:05"]},{"id":"293390","cell":["293390","13","1510","depolder","2012-09-17","basf","06:51","17:05"]},{"id":"293391","cell":["293391","15","1502","depolder","2012-09-17","basf","06:53","17:05"]},{"id":"293392","cell":["293392","19","1499","depolder","2012-09-17","basf","06:58","17:05"]},{"id":"293393","cell":["293393","20","1488","depolder","2012-09-17","basf","07:00","17:05"]},{"id":"293394","cell":["293394","21","1513","depolder","2012-09-17","basf","07:01","17:05"]},{"id":"293395","cell":["293395","16","1483","depolder","2012-09-17","basf","06:42","17:05"]},{"id":"293396","cell":["293396","22","1501","depolder","2012-09-17","basf","07:03","17:05"]},{"id":"293397","cell":["293397","23","1467","depolder","2012-09-17","basf","07:05","17:05"]},{"id":"293398","cell":["293398","24","1489","depolder","2012-09-17","basf","07:06","17:05"]},{"id":"293399","cell":["293399","25","1523","depolder","2012-09-17","basf","07:08","17:05"]},{"id":"293400","cell":["293400","49","1488","depolder","2012-09-17","basf","04:46",""]},{"id":"293401","cell":["293401","49","1499","depolder","2012-09-17","basf","12:46",""]},{"id":"293402","cell":["293402","49","1480","depolder","2012-09-17","basf","20:46",""]},{"id":"293403","cell":["293403","50","1467","depolder","2012-09-17","basf","04:59",""]},{"id":"293404","cell":["293404","50","1467","depolder","2012-09-17","basf","12:54",""]},{"id":"293405","cell":["293405","50","1512","depolder","2012-09-17","basf","20:59",""]},{"id":"293406","cell":["293406","51","1499","depolder","2012-09-17","basf","05:00",""]},{"id":"293407","cell":["293407","51","1458","depolder","2012-09-17","basf","13:00",""]},{"id":"293408","cell":["293408","51","1484","depolder","2012-09-17","basf","21:00",""]},{"id":"293409","cell":["293409","52","1489","depolder","2012-09-17","basf","05:00",""]},{"id":"293410","cell":["293410","52","1482","depolder","2012-09-17","basf","12:55",""]},{"id":"293411","cell":["293411","52","1502","depolder","2012-09-17","basf","21:00",""]},{"id":"293412","cell":["293412","54","1464","depolder","2012-09-17","basf","04:35",""]},{"id":"293413","cell":["293413","54","1464","depolder","2012-09-17","basf","12:31",""]},{"id":"293414","cell":["293414","54","1524","depolder","2012-09-17","basf","20:35",""]},{"id":"293415","cell":["293415","55","1471","depolder","2012-09-17","basf","04:39",""]},{"id":"293416","cell":["293416","55","1471","depolder","2012-09-17","basf","12:35",""]},{"id":"293417","cell":["293417","55","1482","depolder","2012-09-17","basf","20:39",""]},{"id":"293418","cell":["293418","56","1482","depolder","2012-09-17","basf","04:38",""]},{"id":"293419","cell":["293419","56","1476","depolder","2012-09-17","basf","12:33",""]},{"id":"293420","cell":["293420","56","1514","depolder","2012-09-17","basf","20:38",""]},{"id":"293421","cell":["293421","58","1503","depolder","2012-09-17","basf","04:43",""]},{"id":"293422","cell":["293422","58","1503","depolder","2012-09-17","basf","12:36",""]},{"id":"293423","cell":["293423","58","1528","depolder","2012-09-17","basf","20:43",""]},{"id":"293424","cell":["293424","59","1490","depolder","2012-09-17","basf","04:46",""]},{"id":"293425","cell":["293425","59","1490","depolder","2012-09-17","basf","12:44",""]},{"id":"293426","cell":["293426","59","1490","depolder","2012-09-17","basf","20:46",""]},{"id":"293691","cell":["293691","2","1492","depolder","2012-09-18","basf","06:54","17:05"]},{"id":"293692","cell":["293692","3","1531","depolder","2012-09-18","basf","06:58","17:05"]},{"id":"293693","cell":["293693","6","1507","depolder","2012-09-18","basf","06:46","17:05"]},{"id":"293694","cell":["293694","7","1470","depolder","2012-09-18","basf","06:56","17:05"]},{"id":"293695","cell":["293695","8","1525","depolder","2012-09-18","basf","06:47","17:05"]},{"id":"293696","cell":["293696","11","1527","depolder","2012-09-18","basf","06:40","17:05"]}]}
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::execute - 4. Proxy Reply to client
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::send_reply - Splitting header/body of curl reply
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::send_reply - Parsing reply headers
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - Backend headers
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Allow => POST
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Content-Type => application/json; charset=utf-8
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Date => Sat, 19 Sep 2015 20:41:28 GMT
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Server => Microsoft-IIS/8.5
+2015-09-19 22:41:27 [26019]:[4]verbs - 		X-Hostname => ore-sdis-drm-01
+2015-09-19 22:41:27 [26019]:[4]verbs - 		X-Powered-By => ASP.NET
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Content-Length => 72
+2015-09-19 22:41:27 [26019]:[4]verbs - 		Connection => keep-alive
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - 	length: 72
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::send_reply - Sending HTTP status header
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - Sending more headers
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Allow: POST
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Content-Type: application/json; charset=utf-8
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - sending header : Date: Sat, 19 Sep 2015 20:41:28 GMT
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - sending header : X-Hostname: ore-sdis-drm-01
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - sending header : X-Powered-By: ASP.NET
+2015-09-19 22:41:27 [26019]:[5]dtail - CrossProxy::send_reply - Inserting/Replacing cache related headers
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - Done with the headers
+2015-09-19 22:41:27 [26019]:[4]verbs - CrossProxy::send_reply - BODY: {"Message":"The requested resource does not support http method 'GET'."}
+2015-09-19 22:41:27 [26019]:[3]notic - CrossProxy::execute - 5. Done
